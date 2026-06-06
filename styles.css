@@ -1,0 +1,211 @@
+@font-face {
+  font-family: "Fitzgerald";
+  src: url("HV-Fitzgerald-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fitzgerald";
+  src: url("HV-Fitzgerald-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fitzgerald";
+  src: url("HV-Fitzgerald-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fitzgerald";
+  src: url("HV-Fitzgerald-Bold-Italic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  --bg: #ececeb;
+  --text: #1d1d1d;
+  --muted: #6f6f6f;
+  --rail: #c9c9c8;
+  --accent: #ea2a33;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Fitzgerald", serif;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  background: var(--bg);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: clamp(3rem, 9vw, 10rem);
+}
+
+.hero-inner {
+  width: min(640px, 75%);
+  text-align: center;
+  transform: translateY(-28px);
+}
+
+.logo-wordmark {
+  margin: 0 auto 46px auto;
+  font-size: clamp(3.2rem, 8vw, 6.5rem);
+  line-height: 1;
+  font-weight: 700;
+  text-transform: lowercase;
+}
+
+.cta-row {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 44px;
+}
+
+.btn {
+  min-width: 288px;
+  height: 54px;
+  padding: 0 28px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-family: "Fitzgerald", serif;
+  font-size: 2rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  transition: all 180ms ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border: 2px solid var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  filter: brightness(0.95);
+}
+
+.btn-outline {
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  background: transparent;
+}
+
+.btn-outline:hover {
+  background: rgba(234, 42, 51, 0.07);
+}
+
+.tagline {
+  margin: 0;
+  font-size: clamp(1.9rem, 2.7vw, 2rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: #1f1f1f;
+}
+
+/* ---------- Right rail ---------- */
+.right-rail {
+  display: flex;
+  min-height: 100vh;
+}
+
+.section-nav {
+  display: flex;
+  border-left: 1px solid var(--rail);
+}
+
+.section-tab {
+  width: 62px;
+  border-left: 1px solid var(--rail);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 54px;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 2.25rem;
+  letter-spacing: 0.01em;
+}
+
+.section-tab.active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.social-rail {
+  width: 58px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-rail a {
+  color: #7f7f7f;
+  text-decoration: none;
+  font-size: 1.7rem;
+}
+
+.social-rail a:hover {
+  color: #555;
+}
+
+.social-rail {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Optional: basic responsive fallback */
+@media (max-width: 1100px) {
+  .hero {
+    padding-left: 2rem;
+  }
+
+  .hero-inner {
+    width: 92%;
+    transform: none;
+  }
+
+  .section-tab {
+    width: 52px;
+    font-size: 2.2rem;
+  }
+
+  .btn {
+    min-width: 172px;
+    font-size: 1.55rem;
+  }
+}
