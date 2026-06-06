@@ -75,12 +75,11 @@ body {
   transform: translateY(-28px);
 }
 
-.logo-wordmark {
+.logo {
   margin: 0 auto 46px auto;
-  font-size: clamp(3.2rem, 8vw, 6.5rem);
-  line-height: 1;
-  font-weight: 700;
-  text-transform: lowercase;
+  width: min(420px, 100%);
+  height: auto;
+  display: block;
 }
 
 .cta-row {
