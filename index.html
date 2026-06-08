@@ -14,7 +14,9 @@
   <body>
     <div class="app">
       <aside class="rail rail-left">
-        <nav id="leftRailNav" class="rail-nav" aria-label="Opened sections"></nav>
+        <nav id="leftRailNav" class="rail-nav" aria-label="Opened sections">
+          <button type="button" class="rail-tab active" data-target="home">HOME</button>
+        </nav>
       </aside>
 
       <main class="viewport" id="viewport">
@@ -201,7 +203,16 @@
       </main>
 
       <aside class="rail rail-right">
-        <nav id="rightRailNav" class="rail-nav" aria-label="More sections"></nav>
+        <nav id="rightRailNav" class="rail-nav" aria-label="More sections">
+          <button type="button" class="rail-tab" data-target="new-release">
+            NEW RELEASE
+          </button>
+          <button type="button" class="rail-tab" data-target="tour">TOUR</button>
+          <button type="button" class="rail-tab" data-target="watch">WATCH</button>
+          <button type="button" class="rail-tab" data-target="listen">LISTEN</button>
+          <button type="button" class="rail-tab" data-target="merch">MERCH</button>
+          <button type="button" class="rail-tab" data-target="contact">CONTACT</button>
+        </nav>
         <div class="social-rail" aria-label="Social links">
           <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>

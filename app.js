@@ -159,7 +159,10 @@
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("touchstart", handleTouchStart, { passive: true });
   window.addEventListener("touchend", handleTouchEnd, { passive: true });
-  (viewport || window).addEventListener("wheel", handleWheel, { passive: false });
+  window.addEventListener("wheel", handleWheel, { passive: false });
+  if (viewport) {
+    viewport.addEventListener("wheel", handleWheel, { passive: false });
+  }
 
   syncFromHash();
 })();
