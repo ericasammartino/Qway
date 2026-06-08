@@ -9,32 +9,199 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
     />
     <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
   </head>
   <body>
-    <div class="page">
-      <main class="hero">
-        <div class="hero-inner">
-          <img class="logo" src="QWAY LOGO.png" alt="Qway logo" />
+    <div class="app">
+      <aside class="rail rail-left">
+        <nav id="leftRailNav" class="rail-nav" aria-label="Opened sections"></nav>
+      </aside>
 
-          <div class="cta-row">
-            <a href="#" class="btn btn-primary">Listen now</a>
-            <a href="#" class="btn btn-outline">Shop</a>
-          </div>
+      <main class="viewport" id="viewport">
+        <div class="panel-track" id="panelTrack">
+          <section class="panel" id="home">
+            <div class="panel-shell hero-shell">
+              <img class="logo" src="QWAY LOGO.png" alt="Qway logo" />
+              <div class="cta-row">
+                <a href="#" class="btn btn-primary">Listen now</a>
+                <a href="#merch" class="btn btn-outline">Shop</a>
+              </div>
+              <p class="tagline">Eastern Progressive Psych Trio from Philly</p>
+            </div>
+          </section>
 
-          <p class="tagline">Eastern Progressive Psych Trio from Philly</p>
+          <section class="panel" id="new-release" aria-hidden="true" inert>
+            <div class="panel-shell release-shell">
+              <div class="release-left">
+                <h1 class="release-title">( solidus )</h1>
+                <p class="release-date">Album out August 23, 2026</p>
+                <a href="#" class="btn btn-primary compact">Pre-order now</a>
+              </div>
+              <div class="release-right">
+                <img
+                  class="release-cover"
+                  src="solidus-cover.png"
+                  alt="Solidus album cover"
+                />
+                <p class="release-copy">
+                  ( solidus ) is Qway&rsquo;s debut, exploring duality through
+                  genre-blending songs. A limited vinyl run hides treasure clues.
+                </p>
+                <a class="text-link" href="#">Read Album Notes</a>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="tour" aria-hidden="true" inert>
+            <div class="panel-shell tour-shell">
+              <h2 class="section-title">Winter Tour 2026</h2>
+              <p class="section-kicker">5 dates • Northeast US</p>
+              <div class="tour-list" role="list">
+                <div class="tour-row" role="listitem">
+                  <span class="tour-date">01.29</span>
+                  <span class="tour-venue">Milk Boy / Philly, PA</span>
+                  <a class="btn btn-outline tiny" href="#">Tickets</a>
+                </div>
+                <div class="tour-row" role="listitem">
+                  <span class="tour-date">02.13</span>
+                  <span class="tour-venue">Snug Harbor / New Paltz, NY</span>
+                  <a class="btn btn-outline tiny" href="#">Tickets</a>
+                </div>
+                <div class="tour-row" role="listitem">
+                  <span class="tour-date">02.26</span>
+                  <span class="tour-venue">Stella Blues / New Haven, NY</span>
+                  <a class="btn btn-outline tiny" href="#">Tickets</a>
+                </div>
+                <div class="tour-row" role="listitem">
+                  <span class="tour-date">02.27</span>
+                  <span class="tour-venue">Ophelia&rsquo;s / Albany, NY</span>
+                  <a class="btn btn-outline tiny" href="#">Tickets</a>
+                </div>
+                <div class="tour-row" role="listitem">
+                  <span class="tour-date">02.28</span>
+                  <span class="tour-venue">Bar Freida / Queens, NY</span>
+                  <a class="btn btn-outline tiny" href="#">Tickets</a>
+                </div>
+              </div>
+              <a class="btn btn-primary compact subscribe-btn" href="#contact"
+                >Subscribe for updates</a
+              >
+            </div>
+          </section>
+
+          <section class="panel" id="watch" aria-hidden="true" inert>
+            <div class="panel-shell watch-shell">
+              <h2 class="section-title">Hustle / Float</h2>
+              <p class="watch-subtitle">Official Video</p>
+              <a href="#" class="video-card">
+                <img src="watch-thumb.jpg" alt="Hustle / Float video still" />
+                <span class="play-pill"
+                  ><i class="fa-solid fa-play" aria-hidden="true"></i
+                ></span>
+              </a>
+              <div class="cta-row">
+                <a class="btn btn-primary compact" href="#">Watch official video</a>
+                <a class="btn btn-outline compact" href="#listen">Listen to track</a>
+              </div>
+              <p class="platform-row">
+                Also available on
+                <a href="#">YouTube</a>
+                •
+                <a href="#">Spotify</a>
+                •
+                <a href="#">Bandcamp</a>
+              </p>
+            </div>
+          </section>
+
+          <section class="panel" id="listen" aria-hidden="true" inert>
+            <div class="panel-shell listen-shell">
+              <p class="discography-label">DISCOGRAPHY</p>
+              <div class="release-grid">
+                <article class="release-card">
+                  <img src="rogue-cover.png" alt="Rogue cover" />
+                  <h3><i class="fa-regular fa-circle-play" aria-hidden="true"></i> Rogue</h3>
+                  <p>2026</p>
+                </article>
+                <article class="release-card">
+                  <img src="solidus-cover.png" alt="Solidus cover" />
+                  <h3>
+                    <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+                    Solidus
+                  </h3>
+                  <p>2025</p>
+                </article>
+                <article class="release-card">
+                  <img src="death-from-above.jpg" alt="Death from Above cover" />
+                  <h3>
+                    <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+                    Death from Above
+                  </h3>
+                  <p>2021</p>
+                </article>
+              </div>
+              <p class="platform-row">
+                Also available on
+                <a href="#">YouTube</a>
+                •
+                <a href="#">Spotify</a>
+                •
+                <a href="#">Bandcamp</a>
+              </p>
+            </div>
+          </section>
+
+          <section class="panel" id="merch" aria-hidden="true" inert>
+            <div class="panel-shell merch-shell">
+              <p class="discography-label">SHOP</p>
+              <div class="merch-grid">
+                <article class="merch-card">
+                  <img src="merch-cd.png" alt="Compact disc" />
+                  <h3>Compact Disc</h3>
+                  <p>$10</p>
+                </article>
+                <article class="merch-card">
+                  <img src="merch-vinyl.png" alt="Vinyl" />
+                  <h3>Vinyl</h3>
+                  <p>$35</p>
+                </article>
+                <article class="merch-card">
+                  <img src="merch-beanie.png" alt="Qway beanie" />
+                  <h3>Qway Logo Cuffed Knit Beanie</h3>
+                  <p>$25</p>
+                </article>
+                <article class="merch-card">
+                  <img src="merch-longsleeve.png" alt="Heavyweight long sleeve" />
+                  <h3>Heavyweight Longsleeve</h3>
+                  <p>$50</p>
+                </article>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="contact" aria-hidden="true" inert>
+            <div class="panel-shell contact-shell">
+              <div class="contact-copy">
+                <p class="contact-heading">Join our mailing list</p>
+                <a href="#" class="btn btn-outline compact">Subscribe for updates</a>
+                <p class="contact-meta">Bookings + Media</p>
+                <a href="mailto:qwayband@gmail.com" class="contact-email"
+                  >qwayband@gmail.com</a
+                >
+              </div>
+
+              <div class="contact-collage" aria-hidden="true">
+                <img src="contact-top.jpg" alt="" />
+                <img src="contact-middle.jpg" alt="" />
+                <img src="contact-bottom.jpg" alt="" />
+              </div>
+            </div>
+          </section>
         </div>
       </main>
 
-      <aside class="right-rail">
-        <nav class="section-nav" aria-label="Sections">
-          <a href="new-release.html" class="section-tab">NEW RELEASE</a>
-          <a href="#" class="section-tab">TOUR</a>
-          <a href="#" class="section-tab">WATCH</a>
-          <a href="#" class="section-tab">LISTEN</a>
-          <a href="#" class="section-tab">MERCH</a>
-          <a href="#" class="section-tab">CONTACT</a>
-        </nav>
-
+      <aside class="rail rail-right">
+        <nav id="rightRailNav" class="rail-nav" aria-label="More sections"></nav>
         <div class="social-rail" aria-label="Social links">
           <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
           <a href="#" aria-label="Spotify"><i class="fa-brands fa-spotify"></i></a>
