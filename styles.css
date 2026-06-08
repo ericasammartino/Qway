@@ -7,7 +7,23 @@
 }
 
 @font-face {
+  font-family: "HV Fitzgerald";
+  src: url("HV-Fitzgerald-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Fitzgerald";
+  src: url("HV-Fitzgerald-Italic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "HV Fitzgerald";
   src: url("HV-Fitzgerald-Italic.otf") format("opentype");
   font-weight: 400;
   font-style: italic;
@@ -23,6 +39,14 @@
 }
 
 @font-face {
+  font-family: "HV Fitzgerald";
+  src: url("HV-Fitzgerald-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Fitzgerald";
   src: url("HV-Fitzgerald-Bold-Italic.otf") format("opentype");
   font-weight: 700;
@@ -30,8 +54,16 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: "HV Fitzgerald";
+  src: url("HV-Fitzgerald-Bold-Italic.otf") format("opentype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
-  --bg: #ececeb;
+  --bg: #f1f0ec;
   --text: #1d1d1d;
   --muted: #6f6f6f;
   --rail: #c9c9c8;
@@ -51,7 +83,7 @@ body {
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: "Fitzgerald", serif;
+  font-family: "HV Fitzgerald", "Fitzgerald", serif;
 }
 
 .page {
@@ -98,7 +130,7 @@ body {
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  font-family: "Fitzgerald", serif;
+  font-family: "HV Fitzgerald", "Fitzgerald", serif;
   font-size: 2rem;
   line-height: 1;
   letter-spacing: 0.02em;
