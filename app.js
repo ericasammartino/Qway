@@ -18,6 +18,9 @@
   const viewport = document.getElementById("viewport");
   const panels = sections.map((section) => document.getElementById(section.id));
   const root = document.documentElement;
+  const RAIL_TAB_WIDTH = 52;
+  const SOCIAL_RAIL_WIDTH = 58;
+  const MOTION_BUFFER_MS = 180;
 
   const panelIndexById = Object.fromEntries(
     sections.map((section, index) => [section.id, index])
@@ -32,6 +35,33 @@
 
   const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
 
+  function cssTimeToMs(value, fallback) {
+    const trimmed = value.trim();
+    if (!trimmed) return fallback;
+    if (trimmed.endsWith("ms")) {
+      const duration = Number.parseFloat(trimmed);
+      return Number.isFinite(duration) ? duration : fallback;
+    }
+    if (trimmed.endsWith("s")) {
+      const duration = Number.parseFloat(trimmed) * 1000;
+      return Number.isFinite(duration) ? duration : fallback;
+    }
+    return fallback;
+  }
+
+  function getMotionDurationMs(propertyName, fallback) {
+    return cssTimeToMs(getComputedStyle(root).getPropertyValue(propertyName), fallback);
+  }
+
+  function updateRailWidths() {
+    const leftWidth = (activeIndex + 1) * RAIL_TAB_WIDTH;
+    const rightWidth =
+      (sections.length - activeIndex - 1) * RAIL_TAB_WIDTH + SOCIAL_RAIL_WIDTH;
+
+    root.style.setProperty("--left-rail-width", `${leftWidth}px`);
+    root.style.setProperty("--right-rail-width", `${rightWidth}px`);
+  }
+
   function createTab(section, index, isActive) {
     const tab = document.createElement("button");
     tab.type = "button";
@@ -44,6 +74,7 @@
 
   function renderRails() {
     if (!leftRailNav || !rightRailNav) return;
+    updateRailWidths();
     leftRailNav.innerHTML = "";
     rightRailNav.innerHTML = "";
 
@@ -90,7 +121,7 @@
 
     cleanupTimerId = window.setTimeout(() => {
       panels.forEach((panel) => panel && panel.classList.remove("was-active"));
-    }, 760);
+    }, getMotionDurationMs("--content-fade-duration", 880) + MOTION_BUFFER_MS);
   }
 
   function updateTrackPosition() {
@@ -158,7 +189,7 @@
 
     window.setTimeout(() => {
       scrollLocked = false;
-    }, 560);
+    }, getMotionDurationMs("--panel-slide-duration", 1250) + MOTION_BUFFER_MS);
   }
 
   function handleKeydown(event) {

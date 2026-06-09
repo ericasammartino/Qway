@@ -36,9 +36,13 @@
   --muted: #727272;
   --rail: #cececa;
   --accent: #e32832;
-  --ease-cinematic: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --panel-slide-duration: 820ms;
-  --content-fade-duration: 620ms;
+  --ease-cinematic: cubic-bezier(0.4, 0, 0.2, 1);
+  --panel-slide-duration: 1250ms;
+  --content-fade-duration: 880ms;
+  --rail-tab-width: 52px;
+  --social-rail-width: 58px;
+  --left-rail-width: 52px;
+  --right-rail-width: 370px;
 }
 
 * {
@@ -61,17 +65,20 @@ body {
 .app {
   height: 100dvh;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: var(--left-rail-width) 1fr var(--right-rail-width);
   background: var(--bg);
+  transition: grid-template-columns var(--panel-slide-duration) var(--ease-cinematic);
 }
 
 .rail {
   display: flex;
   min-height: 100dvh;
+  overflow: hidden;
 }
 
 .rail-left {
   border-right: 1px solid var(--rail);
+  justify-content: flex-end;
 }
 
 .rail-right {
@@ -85,7 +92,8 @@ body {
 
 .rail-tab {
   position: relative;
-  width: 52px;
+  width: var(--rail-tab-width);
+  flex: 0 0 var(--rail-tab-width);
   border: 0;
   border-left: 1px solid var(--rail);
   background: transparent;
@@ -136,7 +144,8 @@ body {
 }
 
 .social-rail {
-  width: 58px;
+  width: var(--social-rail-width);
+  flex: 0 0 var(--social-rail-width);
   border-left: 1px solid var(--rail);
   display: flex;
   flex-direction: column;
@@ -266,32 +275,6 @@ body {
 .panel.was-active .panel-shell {
   opacity: 0;
   filter: blur(1.5px);
-}
-
-@keyframes panelEnterNext {
-  from {
-    transform: translateX(18px) translateY(0) scale(0.99);
-  }
-  to {
-    transform: translateX(0) translateY(0) scale(1);
-  }
-}
-
-@keyframes panelEnterPrev {
-  from {
-    transform: translateX(-18px) translateY(0) scale(0.99);
-  }
-  to {
-    transform: translateX(0) translateY(0) scale(1);
-  }
-}
-
-html[data-direction="next"] .panel.is-active .panel-shell {
-  animation: panelEnterNext var(--content-fade-duration) var(--ease-cinematic) both;
-}
-
-html[data-direction="prev"] .panel.is-active .panel-shell {
-  animation: panelEnterPrev var(--content-fade-duration) var(--ease-cinematic) both;
 }
 
 .hero-shell {
@@ -640,6 +623,7 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 @media (max-width: 960px) {
   .app {
     grid-template-columns: 1fr;
+    transition: none;
   }
 
   .rail {
@@ -689,6 +673,7 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .app,
   .panel-track {
     transition: none;
   }
