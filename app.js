@@ -17,15 +17,18 @@
   const panelTrack = document.getElementById("panelTrack");
   const viewport = document.getElementById("viewport");
   const panels = sections.map((section) => document.getElementById(section.id));
+  const root = document.documentElement;
 
   const panelIndexById = Object.fromEntries(
     sections.map((section, index) => [section.id, index])
   );
 
   let activeIndex = 0;
+  let previousIndex = 0;
   let scrollLocked = false;
   let touchStartX = 0;
   let touchStartY = 0;
+  let cleanupTimerId = null;
 
   const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
 
@@ -71,6 +74,25 @@
     });
   }
 
+  function updatePanelClasses() {
+    panels.forEach((panel, index) => {
+      if (!panel) return;
+      panel.classList.toggle("is-active", index === activeIndex);
+      panel.classList.toggle(
+        "was-active",
+        index === previousIndex && previousIndex !== activeIndex
+      );
+    });
+
+    if (cleanupTimerId) {
+      window.clearTimeout(cleanupTimerId);
+    }
+
+    cleanupTimerId = window.setTimeout(() => {
+      panels.forEach((panel) => panel && panel.classList.remove("was-active"));
+    }, 760);
+  }
+
   function updateTrackPosition() {
     if (!panelTrack) return;
     if (!isDesktop()) {
@@ -91,9 +113,18 @@
 
   function setActive(index, options = {}) {
     const nextIndex = clampIndex(index);
+    previousIndex = activeIndex;
+
+    if (nextIndex > previousIndex) {
+      root.setAttribute("data-direction", "next");
+    } else if (nextIndex < previousIndex) {
+      root.setAttribute("data-direction", "prev");
+    }
+
     activeIndex = nextIndex;
     renderRails();
     updateA11y();
+    updatePanelClasses();
     updateTrackPosition();
     if (!options.skipHash) {
       updateHash();
@@ -165,4 +196,5 @@
   }
 
   syncFromHash();
+  updatePanelClasses();
 })();
