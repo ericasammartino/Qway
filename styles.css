@@ -693,9 +693,13 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
         border-bottom: 1px solid var(--rail);
         background: var(--bg);
         color: var(--muted);
-        margin: 0 -1.6rem 1.6rem;
+        margin: 0 -1.6rem;
         padding: 0 1rem;
         font-size: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .panel.is-active .mobile-panel-rail {
+        margin-bottom: 1.6rem;
     }
 
     .mobile-panel-rail::after {
@@ -753,8 +757,12 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
-        padding: 0 1.6rem 1.6rem;
+        padding: 0 1.6rem;
         border-bottom: 1px solid var(--rail);
+    }
+
+    .panel.is-active {
+        padding-bottom: 1.6rem;
     }
 
     .panel::before {
