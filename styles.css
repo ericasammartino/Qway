@@ -38,7 +38,7 @@
     --accent: #e32832;
     --panel-slide-duration: 1200ms;
     --content-fade-duration: 900ms;
-    --ease-cinematic: cubic-bezier(0.16, 0.84, 0.24, 1);
+    --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 * {
