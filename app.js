@@ -93,8 +93,15 @@
   }
 
   function updateA11y() {
+    const desktop = isDesktop();
     panels.forEach((panel, index) => {
       if (!panel) return;
+      if (!desktop) {
+        panel.setAttribute("aria-hidden", "false");
+        panel.removeAttribute("inert");
+        return;
+      }
+
       const isActive = index === activeIndex;
       panel.setAttribute("aria-hidden", String(!isActive));
       if (isActive) {
@@ -131,6 +138,11 @@
       return;
     }
     panelTrack.style.transform = `translateX(-${activeIndex * 100}%)`;
+  }
+
+  function handleResize() {
+    updateA11y();
+    updateTrackPosition();
   }
 
   function updateHash() {
@@ -217,7 +229,7 @@
   }
 
   window.addEventListener("hashchange", syncFromHash);
-  window.addEventListener("resize", updateTrackPosition);
+  window.addEventListener("resize", handleResize);
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("touchstart", handleTouchStart, { passive: true });
   window.addEventListener("touchend", handleTouchEnd, { passive: true });

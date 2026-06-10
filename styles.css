@@ -688,6 +688,19 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
         border-bottom: 1px solid var(--rail);
     }
 
+    .panel::before {
+        display: none;
+    }
+
+    .panel-shell,
+    .panel-shell>* {
+        opacity: 1 !important;
+        transform: none !important;
+        filter: none !important;
+        transition: none !important;
+        animation: none !important;
+    }
+
     .release-shell,
     .contact-shell {
         grid-template-columns: 1fr;
