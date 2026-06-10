@@ -17,6 +17,7 @@
   const panelTrack = document.getElementById("panelTrack");
   const viewport = document.getElementById("viewport");
   const panels = sections.map((section) => document.getElementById(section.id));
+  const mobileRailTabs = Array.from(document.querySelectorAll(".mobile-panel-rail"));
   const root = document.documentElement;
   const RAIL_TAB_WIDTH = 52;
   const SOCIAL_RAIL_WIDTH = 58;
@@ -82,6 +83,27 @@
     return tab;
   }
 
+  function scrollPanelIntoView(index) {
+    if (!isDesktop() && panels[index]) {
+      panels[index].scrollIntoView({
+        behavior: prefersReducedMotion() ? "auto" : "smooth",
+        block: "start",
+      });
+    }
+  }
+
+  function bindMobileRails() {
+    mobileRailTabs.forEach((tab) => {
+      const index = panelIndexById[tab.dataset.target];
+      if (index === undefined) return;
+
+      tab.addEventListener("click", () => {
+        setActive(index);
+        scrollPanelIntoView(index);
+      });
+    });
+  }
+
   function renderRails() {
     if (!leftRailNav || !rightRailNav) return;
     updateRailWidths();
@@ -130,6 +152,10 @@
         "was-active",
         index === previousIndex && previousIndex !== activeIndex
       );
+    });
+
+    mobileRailTabs.forEach((tab) => {
+      tab.classList.toggle("active", panelIndexById[tab.dataset.target] === activeIndex);
     });
 
     if (cleanupTimerId) {
@@ -248,6 +274,7 @@
     viewport.addEventListener("wheel", handleWheel, { passive: false });
   }
 
+  bindMobileRails();
   syncFromHash();
   updatePanelClasses();
 })();
