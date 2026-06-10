@@ -670,6 +670,7 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 
     .rail {
         display: flex;
+        flex-direction: column;
         min-height: auto;
         width: 100%;
         background: var(--bg);
@@ -678,47 +679,39 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 
     .rail-left {
         order: 1;
-        position: sticky;
-        top: 0;
+        position: static;
         border-right: 0;
         border-bottom: 1px solid var(--rail);
     }
 
     .rail-right {
         order: 2;
-        position: sticky;
-        top: 49px;
+        position: static;
         border-left: 0;
         border-bottom: 1px solid var(--rail);
     }
 
     .rail-nav {
-        flex: 1;
-        min-width: 0;
-        overflow-x: auto;
-        overscroll-behavior-x: contain;
-        scrollbar-width: none;
-    }
-
-    .rail-nav::-webkit-scrollbar {
-        display: none;
+        width: 100%;
+        flex-direction: column;
     }
 
     .rail-tab {
-        width: auto;
-        min-width: max-content;
+        width: 100%;
+        min-width: 0;
         height: 48px;
-        flex: 0 0 auto;
+        flex: 0 0 48px;
         writing-mode: horizontal-tb;
         transform: none;
         border-left: 0;
-        border-right: 1px solid var(--rail);
+        border-right: 0;
+        border-bottom: 1px solid var(--rail);
         padding: 0 1rem;
         font-size: clamp(1rem, 4vw, 1.25rem);
     }
 
     .rail-left .rail-tab {
-        border-right: 1px solid var(--rail);
+        border-right: 0;
     }
 
     .rail-tab::after {
@@ -736,11 +729,12 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
     }
 
     .social-rail {
-        width: auto;
+        width: 100%;
         min-height: 48px;
-        flex: 0 0 auto;
+        flex: 0 0 48px;
         flex-direction: row;
-        border-left: 1px solid var(--rail);
+        border-left: 0;
+        border-top: 0;
         padding: 0 0.8rem;
         gap: 0.8rem;
     }
