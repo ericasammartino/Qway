@@ -22,6 +22,7 @@
   const RAIL_TAB_WIDTH = 52;
   const SOCIAL_RAIL_WIDTH = 58;
   const MOTION_BUFFER_MS = 180;
+  const MOBILE_RAIL_ACTIVATION_OFFSET = 64;
 
   const panelIndexById = Object.fromEntries(
     sections.map((section, index) => [section.id, index])
@@ -33,6 +34,7 @@
   let touchStartX = 0;
   let touchStartY = 0;
   let cleanupTimerId = null;
+  let mobileScrollFrameId = null;
 
   const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
   const prefersReducedMotion = () =>
@@ -179,6 +181,7 @@
   function handleResize() {
     updateA11y();
     updateTrackPosition();
+    handleMobileRailScroll();
   }
 
   function updateHash() {
@@ -264,8 +267,34 @@
     moveBy(deltaX < 0 ? 1 : -1);
   }
 
+  function handleMobileRailScroll() {
+    if (isDesktop() || !mobileRailTabs.length) return;
+
+    let nextIndex = activeIndex;
+    mobileRailTabs.forEach((tab) => {
+      const index = panelIndexById[tab.dataset.target];
+      if (index === undefined) return;
+      if (tab.getBoundingClientRect().top <= MOBILE_RAIL_ACTIVATION_OFFSET) {
+        nextIndex = index;
+      }
+    });
+
+    if (nextIndex !== activeIndex) {
+      setActive(nextIndex, { skipHash: true });
+    }
+  }
+
+  function handleScroll() {
+    if (mobileScrollFrameId) return;
+    mobileScrollFrameId = window.requestAnimationFrame(() => {
+      mobileScrollFrameId = null;
+      handleMobileRailScroll();
+    });
+  }
+
   window.addEventListener("hashchange", syncFromHash);
   window.addEventListener("resize", handleResize);
+  window.addEventListener("scroll", handleScroll, { passive: true });
   window.addEventListener("keydown", handleKeydown);
   window.addEventListener("touchstart", handleTouchStart, { passive: true });
   window.addEventListener("touchend", handleTouchEnd, { passive: true });

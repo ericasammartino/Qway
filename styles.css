@@ -763,7 +763,6 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 
     .panel-shell,
     .panel-shell>* {
-        opacity: 1 !important;
         transform: none !important;
         filter: none !important;
         transition: none !important;
@@ -772,6 +771,21 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 
     .panel-shell {
         align-self: center;
+        max-height: 0;
+        opacity: 0 !important;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .panel.is-active .panel-shell {
+        max-height: none;
+        opacity: 1 !important;
+        overflow: visible;
+        pointer-events: auto;
+    }
+
+    .panel.is-active .panel-shell>* {
+        opacity: 1 !important;
     }
 
     .release-shell,
