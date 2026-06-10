@@ -34,6 +34,8 @@
   let cleanupTimerId = null;
 
   const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   function cssTimeToMs(value, fallback) {
     const trimmed = value.trim();
@@ -68,7 +70,15 @@
     tab.className = `rail-tab${isActive ? " active" : ""}`;
     tab.textContent = section.label;
     tab.setAttribute("aria-label", section.label);
-    tab.addEventListener("click", () => setActive(index));
+    tab.addEventListener("click", () => {
+      setActive(index);
+      if (!isDesktop() && panels[index]) {
+        panels[index].scrollIntoView({
+          behavior: prefersReducedMotion() ? "auto" : "smooth",
+          block: "start",
+        });
+      }
+    });
     return tab;
   }
 

@@ -661,11 +661,97 @@ html[data-direction="prev"] .panel.is-active .panel-shell {
 
 @media (max-width: 960px) {
     .app {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100dvh;
         grid-template-columns: 1fr;
     }
 
     .rail {
+        display: flex;
+        min-height: auto;
+        width: 100%;
+        background: var(--bg);
+        z-index: 2;
+    }
+
+    .rail-left {
+        order: 1;
+        position: sticky;
+        top: 0;
+        border-right: 0;
+        border-bottom: 1px solid var(--rail);
+    }
+
+    .rail-right {
+        order: 2;
+        position: sticky;
+        top: 49px;
+        border-left: 0;
+        border-bottom: 1px solid var(--rail);
+    }
+
+    .rail-nav {
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: none;
+    }
+
+    .rail-nav::-webkit-scrollbar {
         display: none;
+    }
+
+    .rail-tab {
+        width: auto;
+        min-width: max-content;
+        height: 48px;
+        flex: 0 0 auto;
+        writing-mode: horizontal-tb;
+        transform: none;
+        border-left: 0;
+        border-right: 1px solid var(--rail);
+        padding: 0 1rem;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .rail-left .rail-tab {
+        border-right: 1px solid var(--rail);
+    }
+
+    .rail-tab::after {
+        left: 50%;
+        bottom: 7px;
+        width: 0;
+        height: 2px;
+        transition: width 220ms ease;
+    }
+
+    .rail-tab:hover::after,
+    .rail-tab.active::after {
+        width: 22px;
+        height: 2px;
+    }
+
+    .social-rail {
+        width: auto;
+        min-height: 48px;
+        flex: 0 0 auto;
+        flex-direction: row;
+        border-left: 1px solid var(--rail);
+        padding: 0 0.8rem;
+        gap: 0.8rem;
+    }
+
+    .social-rail a {
+        font-size: 1.2rem;
+        padding-bottom: 0;
+    }
+
+    .viewport {
+        order: 3;
     }
 
     body {
