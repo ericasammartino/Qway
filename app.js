@@ -134,7 +134,7 @@
 
         cleanupTimerId = window.setTimeout(() => {
             panels.forEach((panel) => panel && panel.classList.remove("was-active"));
-        }, 760);
+        }, 300);
     }
 
     function updateTrackPosition() {
@@ -208,7 +208,7 @@
 
         window.setTimeout(() => {
             scrollLocked = false;
-        }, 560);
+        }, 500);
     }
 
     function handleKeydown(event) {

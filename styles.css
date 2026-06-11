@@ -36,9 +36,9 @@
     --muted: #727272;
     --rail: #cececa;
     --accent: #e32832;
-    --panel-slide-duration: 1200ms;
-    --content-fade-duration: 900ms;
-    --ease-cinematic: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --panel-slide-duration: 450ms;
+    --content-fade-duration: 250ms;
+    --ease-cinematic: ease;
 }
 
 * {
@@ -215,63 +215,34 @@ body {
 }
 
 .panel::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0) 62%);
-    opacity: 0;
-    transition: opacity 500ms ease;
-    pointer-events: none;
+    display: none;
 }
 
 .panel.is-active::before {
-    opacity: 1;
+    opacity: 0;
 }
 
 .panel-shell {
     width: min(1000px, 92%);
     opacity: 0;
-    transform: translateY(28px) scale(0.985);
-    filter: blur(1.25px);
-    transition:
-        opacity var(--content-fade-duration) ease,
-        transform var(--content-fade-duration) var(--ease-cinematic),
-        filter var(--content-fade-duration) ease;
+    transition: opacity var(--content-fade-duration) ease;
 }
 
 .panel-shell>* {
     opacity: 0;
-    transform: translateY(18px);
-    transition: opacity 420ms ease, transform 500ms var(--ease-cinematic);
+    transition: opacity var(--content-fade-duration) ease;
 }
 
 .panel.is-active .panel-shell {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-    transition-delay: 120ms;
 }
 
 .panel.is-active .panel-shell>* {
     opacity: 1;
-    transform: translateY(0);
-}
-
-.panel.is-active .panel-shell>*:nth-child(1) {
-    transition-delay: 170ms;
-}
-
-.panel.is-active .panel-shell>*:nth-child(2) {
-    transition-delay: 240ms;
-}
-
-.panel.is-active .panel-shell>*:nth-child(3) {
-    transition-delay: 310ms;
 }
 
 .panel.was-active .panel-shell {
     opacity: 0;
-    filter: blur(1.5px);
 }
 
 .hero-shell {
@@ -624,34 +595,6 @@ body {
     display: block;
     object-fit: cover;
     min-height: 128px;
-}
-
-@keyframes panelEnterNext {
-    from {
-        transform: translateX(18px) scale(0.99);
-    }
-
-    to {
-        transform: translateX(0) scale(1);
-    }
-}
-
-@keyframes panelEnterPrev {
-    from {
-        transform: translateX(-18px) scale(0.99);
-    }
-
-    to {
-        transform: translateX(0) scale(1);
-    }
-}
-
-html[data-direction="next"] .panel.is-active .panel-shell {
-    animation: panelEnterNext var(--content-fade-duration) var(--ease-cinematic) both;
-}
-
-html[data-direction="prev"] .panel.is-active .panel-shell {
-    animation: panelEnterPrev var(--content-fade-duration) var(--ease-cinematic) both;
 }
 
 @media (max-width: 1200px) {
