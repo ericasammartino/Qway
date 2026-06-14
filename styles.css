@@ -39,6 +39,10 @@
     --panel-slide-duration: 450ms;
     --content-fade-duration: 250ms;
     --ease-cinematic: ease;
+    --rail-tab-width: 52px;
+    --social-rail-width: 58px;
+    --left-rail-width: var(--rail-tab-width);
+    --right-rail-width: 370px;
 }
 
 * {
@@ -61,17 +65,20 @@ body {
 .app {
     height: 100dvh;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: var(--left-rail-width) 1fr var(--right-rail-width);
     background: var(--bg);
+    transition: grid-template-columns var(--panel-slide-duration) var(--ease-cinematic);
 }
 
 .rail {
     display: flex;
     min-height: 100dvh;
+    overflow: hidden;
 }
 
 .rail-left {
     border-right: 1px solid var(--rail);
+    justify-content: flex-end;
 }
 
 .rail-right {
@@ -85,7 +92,8 @@ body {
 
 .rail-tab {
     position: relative;
-    width: 52px;
+    width: var(--rail-tab-width);
+    flex: 0 0 var(--rail-tab-width);
     border: 0;
     border-left: 1px solid var(--rail);
     background: transparent;
@@ -148,7 +156,8 @@ body {
 }
 
 .social-rail {
-    width: 58px;
+    width: var(--social-rail-width);
+    flex: 0 0 var(--social-rail-width);
     border-left: 1px solid var(--rail);
     display: flex;
     flex-direction: column;
@@ -750,6 +759,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .app,
     .panel-track {
         transition: none;
     }

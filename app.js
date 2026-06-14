@@ -18,6 +18,8 @@
     const viewport = document.getElementById("viewport");
     const panels = sections.map((section) => document.getElementById(section.id));
     const root = document.documentElement;
+    const RAIL_TAB_WIDTH = 52;
+    const SOCIAL_RAIL_WIDTH = 58;
     const MOBILE_RAIL_ACTIVATION_OFFSET = 64;
 
     const panelIndexById = Object.fromEntries(
@@ -76,8 +78,18 @@
         });
     }
 
+    function updateRailWidths() {
+        const leftWidth = (activeIndex + 1) * RAIL_TAB_WIDTH;
+        const rightWidth =
+            (sections.length - activeIndex - 1) * RAIL_TAB_WIDTH + SOCIAL_RAIL_WIDTH;
+
+        root.style.setProperty("--left-rail-width", `${leftWidth}px`);
+        root.style.setProperty("--right-rail-width", `${rightWidth}px`);
+    }
+
     function renderRails() {
         if (!leftRailNav || !rightRailNav) return;
+        updateRailWidths();
         leftRailNav.innerHTML = "";
         rightRailNav.innerHTML = "";
 
