@@ -38,7 +38,7 @@
     --accent: #e32832;
     --panel-slide-duration: 450ms;
     --content-fade-duration: 250ms;
-    --ease-cinematic: linear;
+    --ease-cinematic: cubic-bezier(0.4, 0, 0.2, 1);
     --rail-tab-width: 52px;
     --social-rail-width: 58px;
     --left-rail-width: var(--rail-tab-width);
@@ -73,7 +73,7 @@ body {
 .rail {
     display: flex;
     min-height: 100dvh;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .rail-left {
@@ -91,6 +91,7 @@ body {
 }
 
 .rail-tab {
+    --rail-tab-slide-x: 0px;
     position: relative;
     width: var(--rail-tab-width);
     flex: 0 0 var(--rail-tab-width);
@@ -102,13 +103,20 @@ body {
     font-size: clamp(1.65rem, 2vw, 2.2rem);
     letter-spacing: 0.01em;
     writing-mode: vertical-rl;
-    transform: rotate(180deg);
+    transform: translateX(var(--rail-tab-slide-x)) rotate(180deg);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     padding: 1rem 0;
-    transition: color 220ms ease, transform 220ms ease;
+    transition:
+        color 220ms ease,
+        transform var(--panel-slide-duration) var(--ease-cinematic);
+}
+
+.rail-tab.rail-tab-moving {
+    z-index: 2;
+    pointer-events: none;
 }
 
 .rail-tab:hover {
@@ -630,6 +638,7 @@ body {
     }
 
     .mobile-panel-rail {
+        --rail-tab-slide-x: 0px;
         position: sticky;
         top: 0;
         z-index: 3;

@@ -42,6 +42,7 @@
         const tab = document.createElement("button");
         tab.type = "button";
         tab.className = `rail-tab${isActive ? " active" : ""}`;
+        tab.dataset.target = section.id;
         tab.textContent = section.label;
         tab.setAttribute("aria-label", section.label);
         tab.addEventListener("click", () => {
@@ -78,6 +79,58 @@
         });
     }
 
+    function getRailTabRects() {
+        const tabs = [
+            ...leftRailNav.querySelectorAll(".rail-tab"),
+            ...rightRailNav.querySelectorAll(".rail-tab"),
+        ];
+
+        return new Map(
+            tabs
+                .filter((tab) => tab.dataset.target)
+                .map((tab) => [tab.dataset.target, tab.getBoundingClientRect()])
+        );
+    }
+
+    function animateRailTabMoves(previousRects) {
+        if (!isDesktop() || prefersReducedMotion() || !previousRects) return;
+
+        const movingTabs = [
+            ...leftRailNav.querySelectorAll(".rail-tab"),
+            ...rightRailNav.querySelectorAll(".rail-tab"),
+        ].filter((tab) => {
+            const previousRect = previousRects.get(tab.dataset.target);
+            if (!previousRect) return false;
+
+            const currentRect = tab.getBoundingClientRect();
+            const deltaX = previousRect.left - currentRect.left;
+            if (Math.abs(deltaX) < 1) return false;
+
+            tab.classList.add("rail-tab-moving");
+            tab.style.transition = "none";
+            tab.style.setProperty("--rail-tab-slide-x", `${deltaX}px`);
+            return true;
+        });
+
+        if (!movingTabs.length) return;
+
+        movingTabs[0].offsetHeight;
+
+        window.requestAnimationFrame(() => {
+            movingTabs.forEach((tab) => {
+                tab.style.transition = "";
+                tab.style.setProperty("--rail-tab-slide-x", "0px");
+            });
+
+            window.setTimeout(() => {
+                movingTabs.forEach((tab) => {
+                    tab.classList.remove("rail-tab-moving");
+                    tab.style.removeProperty("--rail-tab-slide-x");
+                });
+            }, 520);
+        });
+    }
+
     function updateRailWidths() {
         const leftWidth = (activeIndex + 1) * RAIL_TAB_WIDTH;
         const rightWidth =
@@ -89,6 +142,8 @@
 
     function renderRails() {
         if (!leftRailNav || !rightRailNav) return;
+        const previousRects = isDesktop() ? getRailTabRects() : null;
+
         updateRailWidths();
         leftRailNav.innerHTML = "";
         rightRailNav.innerHTML = "";
@@ -105,6 +160,8 @@
             const idx = panelIndexById[section.id];
             rightRailNav.appendChild(createTab(section, idx, false));
         });
+
+        animateRailTabMoves(previousRects);
     }
 
     function updateA11y() {
