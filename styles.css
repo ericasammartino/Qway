@@ -84,6 +84,7 @@ body {
 .rail-right {
     border-left: 1px solid var(--rail);
     display: flex;
+    justify-content: space-between;
 }
 
 .rail-nav {
