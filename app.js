@@ -309,6 +309,14 @@
         renderRails();
         updateA11y();
         updatePanelClasses();
+        // Undo any spurious scrolling the browser performed when an anchor
+        // link tried to bring the target panel into view. Without this the
+        // .viewport's scrollLeft can end up at one viewport width, pushing
+        // the absolutely-positioned panels into the visible area.
+        if (viewport) {
+            viewport.scrollLeft = 0;
+            viewport.scrollTop = 0;
+        }
         if (!options.skipHash) {
             updateHash();
         }
@@ -394,6 +402,21 @@
             handleMobileRailScroll();
         });
     }
+
+    // Intercept clicks on hash-only anchor links (e.g. the home page CTAs
+    // <a href="#listen">) so the browser doesn't try to scroll the absolutely-
+    // positioned target panel into view, which would shove the viewport
+    // sideways and expose every parked panel at once.
+    document.addEventListener("click", (event) => {
+        const link = event.target.closest('a[href^="#"]');
+        if (!link) return;
+        const hash = decodeURIComponent(link.getAttribute("href").slice(1)).trim();
+        if (!hash || !(hash in panelIndexById)) return;
+        event.preventDefault();
+        const index = panelIndexById[hash];
+        setActive(index);
+        scrollPanelIntoView(index);
+    });
 
     window.addEventListener("hashchange", syncFromHash);
     window.addEventListener("resize", handleResize);
