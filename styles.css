@@ -528,19 +528,18 @@ body {
     margin-bottom: 1.6rem;
 }
 
-.release-card {
-    display: block;
-    color: inherit;
+.release-play {
+    color: #666;
     text-decoration: none;
-    transition: transform 220ms ease;
+    display: inline-block;
+    transition: color 220ms ease, transform 220ms ease;
 }
 
-.release-card:hover {
-    transform: translateY(-2px);
-}
-
-.release-card:hover h3 {
+.release-play:hover,
+.release-play:focus-visible {
     color: var(--accent);
+    transform: scale(1.12);
+    outline: none;
 }
 
 .release-card img {
