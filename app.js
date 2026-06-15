@@ -14,7 +14,6 @@
 
     const leftRailNav = document.getElementById("leftRailNav");
     const rightRailNav = document.getElementById("rightRailNav");
-    const panelTrack = document.getElementById("panelTrack");
     const viewport = document.getElementById("viewport");
     const panels = sections.map((section) => document.getElementById(section.id));
     const root = document.documentElement;
@@ -188,14 +187,47 @@
     }
 
     function updatePanelClasses() {
+        const desktop = isDesktop();
+        const moved = previousIndex !== activeIndex;
+        const animatingIndices = new Set([activeIndex, previousIndex]);
+
+        if (desktop && moved) {
+            // Snap any panel that's not the outgoing or incoming one to its
+            // parked position without a visible slide so only the active and
+            // previously-active panels animate across the viewport.
+            panels.forEach((panel, index) => {
+                if (!panel) return;
+                if (!animatingIndices.has(index)) {
+                    panel.style.transition = "none";
+                }
+            });
+        }
+
         panels.forEach((panel, index) => {
             if (!panel) return;
             panel.classList.toggle("is-active", index === activeIndex);
+            panel.classList.toggle("parked-left", desktop && index < activeIndex);
             panel.classList.toggle(
                 "was-active",
                 index === previousIndex && previousIndex !== activeIndex
             );
         });
+
+        if (desktop && moved) {
+            // Force a synchronous style flush so the snapped panels commit
+            // their new position before we restore their transitions.
+            if (viewport) {
+                viewport.getBoundingClientRect();
+            } else {
+                document.body.getBoundingClientRect();
+            }
+            window.requestAnimationFrame(() => {
+                panels.forEach((panel) => {
+                    if (!panel) return;
+                    panel.style.transition = "";
+                });
+            });
+        }
 
         if (cleanupTimerId) {
             window.clearTimeout(cleanupTimerId);
@@ -206,19 +238,20 @@
         }, 300);
     }
 
-    function updateTrackPosition() {
-        if (!panelTrack) return;
-        if (!isDesktop()) {
-            panelTrack.style.transform = "none";
-            return;
-        }
-        panelTrack.style.transform = `translateX(-${activeIndex * 100}%)`;
-    }
-
     function handleResize() {
         updateA11y();
-        updateTrackPosition();
+        updateMobilePanelStyles();
         handleMobileRailScroll();
+    }
+
+    function updateMobilePanelStyles() {
+        if (isDesktop()) return;
+        // On mobile we let the CSS media query stack the panels; ensure no
+        // inline transition overrides linger from a previous desktop session.
+        panels.forEach((panel) => {
+            if (!panel) return;
+            panel.style.transition = "";
+        });
     }
 
     function updateHash() {
@@ -244,7 +277,6 @@
         renderRails();
         updateA11y();
         updatePanelClasses();
-        updateTrackPosition();
         if (!options.skipHash) {
             updateHash();
         }
