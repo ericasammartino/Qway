@@ -686,24 +686,22 @@ body {
     }
 
     .app:not([data-active-section="home"]) .mobile-home-return {
-        display: inline-flex;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        display: flex;
         align-items: center;
         justify-content: center;
-        position: fixed;
-        top: 12px;
-        right: 12px;
-        z-index: 10;
-        height: 36px;
-        padding: 0 16px;
-        font: inherit;
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--muted);
+        height: 52px;
+        padding: 0;
         background: var(--bg);
-        border: 1px solid var(--rail);
-        border-radius: 999px;
+        border: 0;
+        border-bottom: 1px solid var(--rail);
+        color: var(--muted);
+        font: inherit;
+        font-size: clamp(1rem, 4vw, 1.25rem);
         cursor: pointer;
     }
 
@@ -711,6 +709,12 @@ body {
     .app:not([data-active-section="home"]) .mobile-home-return:focus-visible {
         color: var(--text);
         outline: none;
+    }
+
+    /* When the HOME bar is fixed at the top, push each panel's own sticky
+       rail down by its height so the two rails stack instead of overlapping. */
+    .app:not([data-active-section="home"]) .mobile-panel-rail {
+        top: 52px;
     }
 
     .mobile-social-rail.social-rail {
