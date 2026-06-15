@@ -41,7 +41,7 @@
     --ease-cinematic: cubic-bezier(0.4, 0, 0.2, 1);
     --rail-tab-width: 52px;
     --social-rail-width: 58px;
-    --left-rail-width: var(--rail-tab-width);
+    --left-rail-width: 0px;
     --right-rail-width: 370px;
 }
 

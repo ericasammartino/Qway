@@ -161,7 +161,10 @@
     }
 
     function updateRailWidths() {
-        const leftWidth = (activeIndex + 1) * RAIL_TAB_WIDTH;
+        // The HOME tab is suppressed while the hero is active, so the left
+        // rail collapses to zero width on the home page.
+        const leftTabCount = activeIndex === 0 ? 0 : activeIndex + 1;
+        const leftWidth = leftTabCount * RAIL_TAB_WIDTH;
         const rightWidth =
             (sections.length - activeIndex - 1) * RAIL_TAB_WIDTH + SOCIAL_RAIL_WIDTH;
 
@@ -184,6 +187,10 @@
 
         opened.forEach((section) => {
             const idx = panelIndexById[section.id];
+            // While the hero (home) page is active there's nothing to navigate
+            // back to, so suppress its rail tab. The HOME tab reappears as
+            // soon as the user moves to another section.
+            if (section.id === "home" && activeIndex === 0) return;
             leftRailNav.appendChild(createTab(section, idx, idx === activeIndex));
         });
 
@@ -379,7 +386,10 @@
     function handleMobileRailScroll() {
         if (isDesktop() || !mobileRailTabs.length) return;
 
-        let nextIndex = activeIndex;
+        // The hero panel no longer has its own mobile rail tab, so default
+        // back to home whenever none of the other section tabs have crossed
+        // the activation threshold (i.e. we're scrolled up to the hero).
+        let nextIndex = 0;
         mobileRailTabs.forEach((tab) => {
             const index = panelIndexById[tab.dataset.target];
             if (index === undefined) return;
