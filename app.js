@@ -91,18 +91,48 @@
         );
     }
 
-    function animateRailTabMoves(previousRects) {
+    function getRailTabSides() {
+        const sides = new Map();
+        leftRailNav.querySelectorAll(".rail-tab").forEach((tab) => {
+            if (tab.dataset.target) sides.set(tab.dataset.target, "left");
+        });
+        rightRailNav.querySelectorAll(".rail-tab").forEach((tab) => {
+            if (tab.dataset.target) sides.set(tab.dataset.target, "right");
+        });
+        return sides;
+    }
+
+    function animateRailTabMoves(previousRects, previousSides) {
         if (!isDesktop() || prefersReducedMotion() || !previousRects) return;
+
+        // The new active page slides exactly one viewport width into view.
+        // Any rail tab that's hopping between the left and right rail should
+        // ride along on that same translation so it stays glued to the page,
+        // while tabs that are merely shifting position inside the same rail
+        // use a FLIP delta so they don't visibly jump when the rail resizes.
+        const viewportWidth = viewport ? viewport.offsetWidth : 0;
 
         const movingTabs = [
             ...leftRailNav.querySelectorAll(".rail-tab"),
             ...rightRailNav.querySelectorAll(".rail-tab"),
         ].filter((tab) => {
-            const previousRect = previousRects.get(tab.dataset.target);
+            const target = tab.dataset.target;
+            const previousRect = previousRects.get(target);
             if (!previousRect) return false;
 
-            const currentRect = tab.getBoundingClientRect();
-            const deltaX = previousRect.left - currentRect.left;
+            const previousSide = previousSides ? previousSides.get(target) : null;
+            const currentSide = tab.closest("#leftRailNav") ? "left" : "right";
+
+            let deltaX;
+            if (previousSide === "right" && currentSide === "left") {
+                deltaX = viewportWidth;
+            } else if (previousSide === "left" && currentSide === "right") {
+                deltaX = -viewportWidth;
+            } else {
+                const currentRect = tab.getBoundingClientRect();
+                deltaX = previousRect.left - currentRect.left;
+            }
+
             if (Math.abs(deltaX) < 1) return false;
 
             tab.classList.add("rail-tab-moving");
@@ -141,7 +171,9 @@
 
     function renderRails() {
         if (!leftRailNav || !rightRailNav) return;
-        const previousRects = isDesktop() ? getRailTabRects() : null;
+        const desktop = isDesktop();
+        const previousRects = desktop ? getRailTabRects() : null;
+        const previousSides = desktop ? getRailTabSides() : null;
 
         updateRailWidths();
         leftRailNav.innerHTML = "";
@@ -160,7 +192,7 @@
             rightRailNav.appendChild(createTab(section, idx, false));
         });
 
-        animateRailTabMoves(previousRects);
+        animateRailTabMoves(previousRects, previousSides);
     }
 
     function updateA11y() {
