@@ -250,25 +250,6 @@ body {
 
 .panel-shell {
     width: min(1000px, 92%);
-    opacity: 0;
-    transition: opacity var(--content-fade-duration) ease;
-}
-
-.panel-shell>* {
-    opacity: 0;
-    transition: opacity var(--content-fade-duration) ease;
-}
-
-.panel.is-active .panel-shell {
-    opacity: 1;
-}
-
-.panel.is-active .panel-shell>* {
-    opacity: 1;
-}
-
-.panel.was-active .panel-shell {
-    opacity: 0;
 }
 
 .hero-shell {
