@@ -77,12 +77,10 @@ body {
 }
 
 .rail-left {
-    border-right: 1px solid var(--rail);
     justify-content: flex-end;
 }
 
 .rail-right {
-    border-left: 1px solid var(--rail);
     display: flex;
     justify-content: space-between;
 }
