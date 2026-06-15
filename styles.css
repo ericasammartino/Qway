@@ -38,7 +38,7 @@
     --accent: #e32832;
     --panel-slide-duration: 450ms;
     --content-fade-duration: 250ms;
-    --ease-cinematic: ease;
+    --ease-cinematic: linear;
     --rail-tab-width: 52px;
     --social-rail-width: 58px;
     --left-rail-width: var(--rail-tab-width);
