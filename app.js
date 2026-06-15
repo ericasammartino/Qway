@@ -15,6 +15,7 @@
     const leftRailNav = document.getElementById("leftRailNav");
     const rightRailNav = document.getElementById("rightRailNav");
     const viewport = document.getElementById("viewport");
+    const mobileHomeReturn = document.getElementById("mobileHomeReturn");
     const panels = sections.map((section) => document.getElementById(section.id));
     const root = document.documentElement;
     const RAIL_TAB_WIDTH = 52;
@@ -313,6 +314,7 @@
         }
 
         activeIndex = nextIndex;
+        app.dataset.activeSection = sections[activeIndex].id;
         renderRails();
         updateA11y();
         updatePanelClasses();
@@ -438,6 +440,13 @@
         viewport.addEventListener("wheel", handleWheel, { passive: false });
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
+
+    if (mobileHomeReturn) {
+        mobileHomeReturn.addEventListener("click", () => {
+            setActive(0);
+            scrollPanelIntoView(0);
+        });
+    }
 
     bindMobileRails();
     syncFromHash();
