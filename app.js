@@ -271,6 +271,15 @@
             rightRailNav.appendChild(createTab(section, idx, false));
         });
 
+        // Hide the "Opened sections" landmark from assistive tech when it has
+        // no tabs (i.e. on the hero) so screen readers don't announce an
+        // empty navigation region.
+        if (leftRailNav.children.length === 0) {
+            leftRailNav.setAttribute("aria-hidden", "true");
+        } else {
+            leftRailNav.removeAttribute("aria-hidden");
+        }
+
         animateRailTabMoves(previousRects, previousSides);
     }
 
