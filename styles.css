@@ -778,6 +778,19 @@ body {
         padding-bottom: 2.4rem;
     }
 
+    /* Keep the hero CTAs side-by-side on phones instead of wrapping. The
+       default .btn min-width pushes them onto separate rows on narrow
+       viewports, so let them share the row equally and shrink as needed. */
+    .hero-shell .cta-row {
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .hero-shell .cta-row .btn {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+
     .panel::before {
         display: none;
     }
