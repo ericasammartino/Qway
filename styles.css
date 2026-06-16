@@ -770,6 +770,14 @@ body {
         padding-bottom: 1.6rem;
     }
 
+    /* The hero has no mobile-panel-rail to push its content down, so give
+       it explicit vertical padding instead of sitting flush against the
+       top edge and against the panel divider below it. */
+    #home.panel.is-active {
+        padding-top: 2.4rem;
+        padding-bottom: 2.4rem;
+    }
+
     .panel::before {
         display: none;
     }
