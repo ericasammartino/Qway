@@ -692,9 +692,9 @@ body {
         z-index: 5;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         height: 52px;
-        padding: 0;
+        padding: 0 1.6rem;
         background: var(--bg);
         border: 0;
         border-bottom: 1px solid var(--rail);
@@ -708,6 +708,20 @@ body {
     .app:not([data-active-section="home"]) .mobile-home-return:focus-visible {
         color: var(--text);
         outline: none;
+    }
+
+    .mobile-home-return-label {
+        flex: 0 0 auto;
+    }
+
+    .mobile-section-label {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
     }
 
     .mobile-social-rail.social-rail {

@@ -16,6 +16,7 @@
     const rightRailNav = document.getElementById("rightRailNav");
     const viewport = document.getElementById("viewport");
     const mobileHomeReturn = document.getElementById("mobileHomeReturn");
+    const mobileSectionLabel = document.getElementById("mobileSectionLabel");
     const panels = sections.map((section) => document.getElementById(section.id));
     const root = document.documentElement;
     const RAIL_TAB_WIDTH = 52;
@@ -395,6 +396,9 @@
 
         activeIndex = nextIndex;
         app.dataset.activeSection = sections[activeIndex].id;
+        if (mobileSectionLabel) {
+            mobileSectionLabel.textContent = sections[activeIndex].label;
+        }
         renderRails();
         updateA11y();
         updatePanelClasses();
@@ -466,24 +470,14 @@
     }
 
     function handleMobileRailScroll() {
-        if (isDesktop() || !mobileRailTabs.length) return;
-
-        // The hero panel no longer has its own mobile rail tab, so default
-        // back to home whenever none of the other section tabs have crossed
-        // the activation threshold (i.e. we're scrolled up to the hero).
-        let nextIndex = 0;
-        mobileRailTabs.forEach((tab) => {
-            const index = panelIndexById[tab.dataset.target];
-            if (index === undefined) return;
-
-            if (tab.getBoundingClientRect().top <= MOBILE_RAIL_ACTIVATION_OFFSET) {
-                nextIndex = index;
-            }
-        });
-
-        if (nextIndex !== activeIndex) {
-            setActive(nextIndex, { skipHash: true });
-        }
+        // Scroll-based auto-activation has been disabled. With non-sticky
+        // rails and collapse-on-flip, switching the active section while
+        // the user was scrolling produced a layout shift that immediately
+        // pushed the next rail under the activation threshold, triggering
+        // another flip, which collapsed the new section and re-anchored
+        // the scroll, and so on. Sections now switch only when the user
+        // taps a rail, taps the HOME bar, or follows a #hash link --
+        // mirroring the desktop's click/wheel discrete-step model.
     }
 
     function handleScroll() {
