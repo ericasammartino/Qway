@@ -789,6 +789,7 @@ body {
     .hero-shell .cta-row .btn {
         flex: 1 1 0;
         min-width: 0;
+        padding: 0;
     }
 
     .panel::before {
