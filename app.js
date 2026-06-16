@@ -429,16 +429,26 @@
     }
 
     function handleWheel(event) {
-        if (!isDesktop()) return;
         if (scrollLocked) return;
 
         const delta =
             Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
         if (Math.abs(delta) < 14) return;
 
-        event.preventDefault();
+        const desktop = isDesktop();
+        if (desktop) {
+            event.preventDefault();
+        }
         scrollLocked = true;
-        moveBy(delta > 0 ? 1 : -1);
+
+        const direction = delta > 0 ? 1 : -1;
+        const nextIndex = clampIndex(activeIndex + direction);
+        if (nextIndex !== activeIndex) {
+            setActive(nextIndex);
+            if (!desktop) {
+                scrollPanelIntoView(nextIndex);
+            }
+        }
 
         window.setTimeout(() => {
             scrollLocked = false;
@@ -462,11 +472,27 @@
     }
 
     function handleTouchEnd(event) {
-        if (!isDesktop()) return;
         const deltaX = event.changedTouches[0].clientX - touchStartX;
         const deltaY = event.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY)) return;
-        moveBy(deltaX < 0 ? 1 : -1);
+
+        if (isDesktop()) {
+            // Desktop touch screens: horizontal swipe navigates.
+            if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+            moveBy(deltaX < 0 ? 1 : -1);
+            return;
+        }
+
+        // Mobile: vertical swipe navigates one section at a time, mirroring
+        // the desktop wheel/click model. Up-swipe -> next, down-swipe ->
+        // previous. The new active section is then scrolled into view so
+        // the page reflows around it.
+        if (Math.abs(deltaY) < 42 || Math.abs(deltaY) < Math.abs(deltaX)) return;
+        const direction = deltaY < 0 ? 1 : -1;
+        const nextIndex = clampIndex(activeIndex + direction);
+        if (nextIndex !== activeIndex) {
+            setActive(nextIndex);
+            scrollPanelIntoView(nextIndex);
+        }
     }
 
     function handleMobileRailScroll() {
