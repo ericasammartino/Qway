@@ -103,6 +103,34 @@
         return sides;
     }
 
+    function fadeOutTab(tab) {
+        // Detach the tab from its rail and pin it at its current screen
+        // position so the rail can collapse around it. The tab then fades to
+        // opacity 0 and removes itself from the DOM. Used for the HOME tab
+        // when collapsing back to the hero, where the tab won't exist in the
+        // next render at all.
+        const rect = tab.getBoundingClientRect();
+        document.body.appendChild(tab);
+        tab.style.position = "fixed";
+        tab.style.top = `${rect.top}px`;
+        tab.style.left = `${rect.left}px`;
+        tab.style.width = `${rect.width}px`;
+        tab.style.height = `${rect.height}px`;
+        tab.style.margin = "0";
+        tab.style.zIndex = "1";
+        tab.style.pointerEvents = "none";
+        tab.style.transition = "opacity var(--panel-slide-duration) var(--ease-cinematic)";
+        tab.setAttribute("tabindex", "-1");
+        tab.setAttribute("aria-hidden", "true");
+        tab.offsetHeight;
+        window.requestAnimationFrame(() => {
+            tab.style.opacity = "0";
+        });
+        window.setTimeout(() => {
+            tab.remove();
+        }, 520);
+    }
+
     function animateRailTabMoves(previousRects, previousSides) {
         if (!isDesktop() || prefersReducedMotion() || !previousRects) return;
 
@@ -112,11 +140,24 @@
         // while tabs that are merely shifting position inside the same rail
         // use a FLIP delta so they don't visibly jump when the rail resizes.
         const viewportWidth = viewport ? viewport.offsetWidth : 0;
-
-        const movingTabs = [
+        const allTabs = [
             ...leftRailNav.querySelectorAll(".rail-tab"),
             ...rightRailNav.querySelectorAll(".rail-tab"),
-        ].filter((tab) => {
+        ];
+
+        // Tabs that exist now but didn't in the previous render (e.g. the
+        // HOME tab the first time the user leaves the hero) fade in from
+        // opacity 0 instead of popping into place.
+        const enteringTabs = allTabs.filter((tab) => {
+            const target = tab.dataset.target;
+            return target && !previousRects.has(target);
+        });
+        enteringTabs.forEach((tab) => {
+            tab.style.transition = "none";
+            tab.style.opacity = "0";
+        });
+
+        const movingTabs = allTabs.filter((tab) => {
             const target = tab.dataset.target;
             const previousRect = previousRects.get(target);
             if (!previousRect) return false;
@@ -142,20 +183,28 @@
             return true;
         });
 
-        if (!movingTabs.length) return;
+        if (!movingTabs.length && !enteringTabs.length) return;
 
-        movingTabs[0].offsetHeight;
+        (movingTabs[0] || enteringTabs[0]).offsetHeight;
 
         window.requestAnimationFrame(() => {
             movingTabs.forEach((tab) => {
                 tab.style.transition = "";
                 tab.style.setProperty("--rail-tab-slide-x", "0px");
             });
+            enteringTabs.forEach((tab) => {
+                tab.style.transition = "opacity var(--panel-slide-duration) var(--ease-cinematic)";
+                tab.style.opacity = "1";
+            });
 
             window.setTimeout(() => {
                 movingTabs.forEach((tab) => {
                     tab.classList.remove("rail-tab-moving");
                     tab.style.removeProperty("--rail-tab-slide-x");
+                });
+                enteringTabs.forEach((tab) => {
+                    tab.style.transition = "";
+                    tab.style.opacity = "";
                 });
             }, 520);
         });
@@ -178,6 +227,28 @@
         const desktop = isDesktop();
         const previousRects = desktop ? getRailTabRects() : null;
         const previousSides = desktop ? getRailTabSides() : null;
+
+        // Build the set of section ids that will be present after this
+        // render so we can detect tabs that are about to leave the DOM
+        // entirely (currently only ever the HOME tab when collapsing back
+        // to the hero).
+        const newTargets = new Set();
+        sections.forEach((section) => {
+            if (section.id === "home" && activeIndex === 0) return;
+            newTargets.add(section.id);
+        });
+
+        if (desktop && !prefersReducedMotion()) {
+            [
+                ...leftRailNav.querySelectorAll(".rail-tab"),
+                ...rightRailNav.querySelectorAll(".rail-tab"),
+            ].forEach((tab) => {
+                const target = tab.dataset.target;
+                if (target && !newTargets.has(target)) {
+                    fadeOutTab(tab);
+                }
+            });
+        }
 
         updateRailWidths();
         leftRailNav.innerHTML = "";
