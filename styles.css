@@ -41,7 +41,7 @@
     --ease-cinematic: cubic-bezier(0.4, 0, 0.2, 1);
     --rail-tab-width: 52px;
     --social-rail-width: 58px;
-    --left-rail-width: var(--rail-tab-width);
+    --left-rail-width: 0px;
     --right-rail-width: 370px;
 }
 
@@ -158,7 +158,8 @@ body {
 }
 
 .mobile-panel-rail,
-.mobile-social-rail.social-rail {
+.mobile-social-rail.social-rail,
+.mobile-home-return {
     display: none;
 }
 
@@ -646,9 +647,8 @@ body {
 
     .mobile-panel-rail {
         --rail-tab-slide-x: 0px;
-        position: sticky;
-        top: 0;
-        z-index: 3;
+        position: static;
+        z-index: auto;
         width: calc(100% + 3.2rem);
         min-width: 0;
         height: 52px;
@@ -682,6 +682,46 @@ body {
     .mobile-panel-rail.active::after {
         width: 22px;
         height: 2px;
+    }
+
+    .app:not([data-active-section="home"]) .mobile-home-return {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 52px;
+        padding: 0 1.6rem;
+        background: var(--bg);
+        border: 0;
+        border-bottom: 1px solid var(--rail);
+        color: var(--muted);
+        font: inherit;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        cursor: pointer;
+    }
+
+    .app:not([data-active-section="home"]) .mobile-home-return:hover,
+    .app:not([data-active-section="home"]) .mobile-home-return:focus-visible {
+        color: var(--text);
+        outline: none;
+    }
+
+    .mobile-home-return-label {
+        flex: 0 0 auto;
+    }
+
+    .mobile-section-label {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        pointer-events: none;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
     }
 
     .mobile-social-rail.social-rail {
@@ -737,6 +777,27 @@ body {
         padding-bottom: 1.6rem;
     }
 
+    /* The hero has no mobile-panel-rail to push its content down, so give
+       it explicit vertical padding when it's the open section. */
+    #home.panel.is-active {
+        padding-top: 10rem;
+        padding-bottom: 10rem;
+    }
+
+    /* Keep the hero CTAs side-by-side on phones instead of wrapping. The
+       default .btn min-width pushes them onto separate rows on narrow
+       viewports, so let them share the row equally and shrink as needed. */
+    .hero-shell .cta-row {
+        flex-wrap: nowrap;
+        width: 100%;
+    }
+
+    .hero-shell .cta-row .btn {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 0;
+    }
+
     .panel::before {
         display: none;
     }
@@ -749,6 +810,9 @@ body {
         animation: none !important;
     }
 
+    /* Only the active section's content is shown on mobile, mirroring the
+       desktop one-panel-at-a-time model. Tapping a rail or scrolling its
+       label past the activation threshold flips which section is active. */
     .panel-shell {
         align-self: center;
         max-height: 0;

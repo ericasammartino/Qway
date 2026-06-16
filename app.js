@@ -15,6 +15,8 @@
     const leftRailNav = document.getElementById("leftRailNav");
     const rightRailNav = document.getElementById("rightRailNav");
     const viewport = document.getElementById("viewport");
+    const mobileHomeReturn = document.getElementById("mobileHomeReturn");
+    const mobileSectionLabel = document.getElementById("mobileSectionLabel");
     const panels = sections.map((section) => document.getElementById(section.id));
     const root = document.documentElement;
     const RAIL_TAB_WIDTH = 52;
@@ -102,6 +104,34 @@
         return sides;
     }
 
+    function fadeOutTab(tab) {
+        // Detach the tab from its rail and pin it at its current screen
+        // position so the rail can collapse around it. The tab then fades to
+        // opacity 0 and removes itself from the DOM. Used for the HOME tab
+        // when collapsing back to the hero, where the tab won't exist in the
+        // next render at all.
+        const rect = tab.getBoundingClientRect();
+        document.body.appendChild(tab);
+        tab.style.position = "fixed";
+        tab.style.top = `${rect.top}px`;
+        tab.style.left = `${rect.left}px`;
+        tab.style.width = `${rect.width}px`;
+        tab.style.height = `${rect.height}px`;
+        tab.style.margin = "0";
+        tab.style.zIndex = "1";
+        tab.style.pointerEvents = "none";
+        tab.style.transition = "opacity var(--panel-slide-duration) var(--ease-cinematic)";
+        tab.setAttribute("tabindex", "-1");
+        tab.setAttribute("aria-hidden", "true");
+        tab.offsetHeight;
+        window.requestAnimationFrame(() => {
+            tab.style.opacity = "0";
+        });
+        window.setTimeout(() => {
+            tab.remove();
+        }, 520);
+    }
+
     function animateRailTabMoves(previousRects, previousSides) {
         if (!isDesktop() || prefersReducedMotion() || !previousRects) return;
 
@@ -111,11 +141,24 @@
         // while tabs that are merely shifting position inside the same rail
         // use a FLIP delta so they don't visibly jump when the rail resizes.
         const viewportWidth = viewport ? viewport.offsetWidth : 0;
-
-        const movingTabs = [
+        const allTabs = [
             ...leftRailNav.querySelectorAll(".rail-tab"),
             ...rightRailNav.querySelectorAll(".rail-tab"),
-        ].filter((tab) => {
+        ];
+
+        // Tabs that exist now but didn't in the previous render (e.g. the
+        // HOME tab the first time the user leaves the hero) fade in from
+        // opacity 0 instead of popping into place.
+        const enteringTabs = allTabs.filter((tab) => {
+            const target = tab.dataset.target;
+            return target && !previousRects.has(target);
+        });
+        enteringTabs.forEach((tab) => {
+            tab.style.transition = "none";
+            tab.style.opacity = "0";
+        });
+
+        const movingTabs = allTabs.filter((tab) => {
             const target = tab.dataset.target;
             const previousRect = previousRects.get(target);
             if (!previousRect) return false;
@@ -141,14 +184,18 @@
             return true;
         });
 
-        if (!movingTabs.length) return;
+        if (!movingTabs.length && !enteringTabs.length) return;
 
-        movingTabs[0].offsetHeight;
+        (movingTabs[0] || enteringTabs[0]).offsetHeight;
 
         window.requestAnimationFrame(() => {
             movingTabs.forEach((tab) => {
                 tab.style.transition = "";
                 tab.style.setProperty("--rail-tab-slide-x", "0px");
+            });
+            enteringTabs.forEach((tab) => {
+                tab.style.transition = "opacity var(--panel-slide-duration) var(--ease-cinematic)";
+                tab.style.opacity = "1";
             });
 
             window.setTimeout(() => {
@@ -156,12 +203,19 @@
                     tab.classList.remove("rail-tab-moving");
                     tab.style.removeProperty("--rail-tab-slide-x");
                 });
+                enteringTabs.forEach((tab) => {
+                    tab.style.transition = "";
+                    tab.style.opacity = "";
+                });
             }, 520);
         });
     }
 
     function updateRailWidths() {
-        const leftWidth = (activeIndex + 1) * RAIL_TAB_WIDTH;
+        // The HOME tab is suppressed while the hero is active, so the left
+        // rail collapses to zero width on the home page.
+        const leftTabCount = activeIndex === 0 ? 0 : activeIndex + 1;
+        const leftWidth = leftTabCount * RAIL_TAB_WIDTH;
         const rightWidth =
             (sections.length - activeIndex - 1) * RAIL_TAB_WIDTH + SOCIAL_RAIL_WIDTH;
 
@@ -175,6 +229,28 @@
         const previousRects = desktop ? getRailTabRects() : null;
         const previousSides = desktop ? getRailTabSides() : null;
 
+        // Build the set of section ids that will be present after this
+        // render so we can detect tabs that are about to leave the DOM
+        // entirely (currently only ever the HOME tab when collapsing back
+        // to the hero).
+        const newTargets = new Set();
+        sections.forEach((section) => {
+            if (section.id === "home" && activeIndex === 0) return;
+            newTargets.add(section.id);
+        });
+
+        if (desktop && !prefersReducedMotion()) {
+            [
+                ...leftRailNav.querySelectorAll(".rail-tab"),
+                ...rightRailNav.querySelectorAll(".rail-tab"),
+            ].forEach((tab) => {
+                const target = tab.dataset.target;
+                if (target && !newTargets.has(target)) {
+                    fadeOutTab(tab);
+                }
+            });
+        }
+
         updateRailWidths();
         leftRailNav.innerHTML = "";
         rightRailNav.innerHTML = "";
@@ -184,6 +260,10 @@
 
         opened.forEach((section) => {
             const idx = panelIndexById[section.id];
+            // While the hero (home) page is active there's nothing to navigate
+            // back to, so suppress its rail tab. The HOME tab reappears as
+            // soon as the user moves to another section.
+            if (section.id === "home" && activeIndex === 0) return;
             leftRailNav.appendChild(createTab(section, idx, idx === activeIndex));
         });
 
@@ -191,6 +271,15 @@
             const idx = panelIndexById[section.id];
             rightRailNav.appendChild(createTab(section, idx, false));
         });
+
+        // Hide the "Opened sections" landmark from assistive tech when it has
+        // no tabs (i.e. on the hero) so screen readers don't announce an
+        // empty navigation region.
+        if (leftRailNav.children.length === 0) {
+            leftRailNav.setAttribute("aria-hidden", "true");
+        } else {
+            leftRailNav.removeAttribute("aria-hidden");
+        }
 
         animateRailTabMoves(previousRects, previousSides);
     }
@@ -306,6 +395,10 @@
         }
 
         activeIndex = nextIndex;
+        app.dataset.activeSection = sections[activeIndex].id;
+        if (mobileSectionLabel) {
+            mobileSectionLabel.textContent = sections[activeIndex].label;
+        }
         renderRails();
         updateA11y();
         updatePanelClasses();
@@ -336,16 +429,26 @@
     }
 
     function handleWheel(event) {
-        if (!isDesktop()) return;
         if (scrollLocked) return;
 
         const delta =
             Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
         if (Math.abs(delta) < 14) return;
 
-        event.preventDefault();
+        const desktop = isDesktop();
+        if (desktop) {
+            event.preventDefault();
+        }
         scrollLocked = true;
-        moveBy(delta > 0 ? 1 : -1);
+
+        const direction = delta > 0 ? 1 : -1;
+        const nextIndex = clampIndex(activeIndex + direction);
+        if (nextIndex !== activeIndex) {
+            setActive(nextIndex);
+            if (!desktop) {
+                scrollPanelIntoView(nextIndex);
+            }
+        }
 
         window.setTimeout(() => {
             scrollLocked = false;
@@ -369,29 +472,38 @@
     }
 
     function handleTouchEnd(event) {
-        if (!isDesktop()) return;
         const deltaX = event.changedTouches[0].clientX - touchStartX;
         const deltaY = event.changedTouches[0].clientY - touchStartY;
-        if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY)) return;
-        moveBy(deltaX < 0 ? 1 : -1);
+
+        if (isDesktop()) {
+            // Desktop touch screens: horizontal swipe navigates.
+            if (Math.abs(deltaX) < 42 || Math.abs(deltaX) < Math.abs(deltaY)) return;
+            moveBy(deltaX < 0 ? 1 : -1);
+            return;
+        }
+
+        // Mobile: vertical swipe navigates one section at a time, mirroring
+        // the desktop wheel/click model. Up-swipe -> next, down-swipe ->
+        // previous. The new active section is then scrolled into view so
+        // the page reflows around it.
+        if (Math.abs(deltaY) < 42 || Math.abs(deltaY) < Math.abs(deltaX)) return;
+        const direction = deltaY < 0 ? 1 : -1;
+        const nextIndex = clampIndex(activeIndex + direction);
+        if (nextIndex !== activeIndex) {
+            setActive(nextIndex);
+            scrollPanelIntoView(nextIndex);
+        }
     }
 
     function handleMobileRailScroll() {
-        if (isDesktop() || !mobileRailTabs.length) return;
-
-        let nextIndex = activeIndex;
-        mobileRailTabs.forEach((tab) => {
-            const index = panelIndexById[tab.dataset.target];
-            if (index === undefined) return;
-
-            if (tab.getBoundingClientRect().top <= MOBILE_RAIL_ACTIVATION_OFFSET) {
-                nextIndex = index;
-            }
-        });
-
-        if (nextIndex !== activeIndex) {
-            setActive(nextIndex, { skipHash: true });
-        }
+        // Scroll-based auto-activation has been disabled. With non-sticky
+        // rails and collapse-on-flip, switching the active section while
+        // the user was scrolling produced a layout shift that immediately
+        // pushed the next rail under the activation threshold, triggering
+        // another flip, which collapsed the new section and re-anchored
+        // the scroll, and so on. Sections now switch only when the user
+        // taps a rail, taps the HOME bar, or follows a #hash link --
+        // mirroring the desktop's click/wheel discrete-step model.
     }
 
     function handleScroll() {
@@ -428,6 +540,13 @@
         viewport.addEventListener("wheel", handleWheel, { passive: false });
     }
     window.addEventListener("scroll", handleScroll, { passive: true });
+
+    if (mobileHomeReturn) {
+        mobileHomeReturn.addEventListener("click", () => {
+            setActive(0);
+            scrollPanelIntoView(0);
+        });
+    }
 
     bindMobileRails();
     syncFromHash();

@@ -11,19 +11,20 @@
 </head>
 
 <body>
-    <div class="app">
+    <div class="app" data-active-section="home">
+        <button type="button" id="mobileHomeReturn" class="mobile-home-return"
+            data-target="home" aria-label="Return to home">
+            <span class="mobile-home-return-label">HOME</span>
+            <span class="mobile-section-label" id="mobileSectionLabel" aria-hidden="true"></span>
+        </button>
+
         <aside class="rail rail-left">
-            <nav id="leftRailNav" class="rail-nav" aria-label="Opened sections">
-                <button type="button" class="rail-tab active" data-target="home">HOME</button>
-            </nav>
+            <nav id="leftRailNav" class="rail-nav" aria-label="Opened sections" aria-hidden="true"></nav>
         </aside>
 
         <main class="viewport" id="viewport">
             <div class="panel-track" id="panelTrack">
                 <section class="panel is-active" id="home">
-                    <button type="button" class="mobile-panel-rail rail-tab active" data-target="home">
-                        HOME
-                    </button>
                     <div class="panel-shell hero-shell">
                         <img class="logo" src="QWAY_LOGO.png" alt="Qway logo" />
                         <div class="cta-row">
