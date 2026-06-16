@@ -662,13 +662,9 @@ body {
         border-bottom: 1px solid var(--rail);
         background: var(--bg);
         color: var(--muted);
-        margin: 0 -1.6rem;
+        margin: 0 -1.6rem 1.6rem;
         padding: 0 1rem;
         font-size: clamp(1rem, 4vw, 1.25rem);
-    }
-
-    .panel.is-active .mobile-panel-rail {
-        margin-bottom: 1.6rem;
     }
 
     .mobile-panel-rail::after {
@@ -760,20 +756,16 @@ body {
         flex-direction: column;
         align-items: stretch;
         justify-content: flex-start;
-        padding: 0 1.6rem;
+        padding: 0 1.6rem 1.6rem;
         border-bottom: 1px solid var(--rail);
         transform: none !important;
         transition: none !important;
     }
 
-    .panel.is-active {
-        padding-bottom: 1.6rem;
-    }
-
     /* The hero has no mobile-panel-rail to push its content down, so give
        it explicit vertical padding instead of sitting flush against the
        top edge and against the panel divider below it. */
-    #home.panel.is-active {
+    #home.panel {
         padding-top: 10rem;
         padding-bottom: 10rem;
     }
@@ -804,23 +796,11 @@ body {
         animation: none !important;
     }
 
+    /* Every section stays open on mobile so the page reads as a continuous
+       scroll. The is-active state still drives URL hash and HOME-bar
+       visibility, but no longer gates content visibility. */
     .panel-shell {
         align-self: center;
-        max-height: 0;
-        opacity: 0 !important;
-        overflow: hidden;
-        pointer-events: none;
-    }
-
-    .panel.is-active .panel-shell {
-        max-height: none;
-        opacity: 1 !important;
-        overflow: visible;
-        pointer-events: auto;
-    }
-
-    .panel.is-active .panel-shell>* {
-        opacity: 1 !important;
     }
 
     .release-shell,
