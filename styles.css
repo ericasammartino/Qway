@@ -774,8 +774,8 @@ body {
        it explicit vertical padding instead of sitting flush against the
        top edge and against the panel divider below it. */
     #home.panel.is-active {
-        padding-top: 2.4rem;
-        padding-bottom: 2.4rem;
+        padding-top: 10rem;
+        padding-bottom: 10rem;
     }
 
     /* Keep the hero CTAs side-by-side on phones instead of wrapping. The
