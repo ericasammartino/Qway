@@ -802,7 +802,11 @@ body {
     }
 
     .panel.is-active .mobile-panel-rail {
-        margin-bottom: 1.6rem;
+        display: none;
+    }
+
+    .app:not([data-active-section="home"]) .panel.is-active {
+        padding-top: calc(52px + 1.6rem);
     }
 
     #home.panel {
@@ -848,7 +852,25 @@ body {
         opacity: 1 !important;
     }
 
-    .release-shell,
+    .release-shell {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "meta"
+            "cover"
+            "notes";
+        justify-items: center;
+        text-align: center;
+    }
+
+    .release-cover {
+        width: min(280px, 100%);
+    }
+
+    .release-copy {
+        max-width: 32rem;
+    }
+
     .contact-shell {
         grid-template-columns: 1fr;
     }
