@@ -817,6 +817,11 @@ body {
     }
 
     #home.panel {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    #home.panel.is-active {
         padding-top: 10rem;
         padding-bottom: 10rem;
     }
