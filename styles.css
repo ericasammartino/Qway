@@ -500,6 +500,10 @@ body {
     background: #000;
 }
 
+.watch-video-mobile {
+    display: none;
+}
+
 .platform-row {
     margin: 2rem 0 0;
     color: #595959;
@@ -905,6 +909,14 @@ body {
         aspect-ratio: 9 / 16;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .watch-video-desktop {
+        display: none;
+    }
+
+    .watch-video-mobile {
+        display: block;
     }
 
     .watch-shell .platform-row {
