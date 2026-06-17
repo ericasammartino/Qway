@@ -895,6 +895,26 @@ body {
         transform-origin: center;
     }
 
+    .watch-shell {
+        width: 100%;
+        max-width: none;
+    }
+
+    .watch-shell .video-card.video-embed {
+        width: calc(100vw - 3.2rem);
+        aspect-ratio: 9 / 16;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .watch-shell .platform-row {
+        width: calc(100vw - 3.2rem);
+        margin-left: auto;
+        margin-right: auto;
+        overflow-wrap: anywhere;
+        text-align: center;
+    }
+
     .panel-shell,
     .panel-shell>* {
         transform: none !important;
