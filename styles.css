@@ -55,6 +55,10 @@ body {
     height: 100%;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background: var(--bg);
     color: var(--text);
@@ -771,6 +775,12 @@ body {
 
     body {
         overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+    }
+
+    html {
+        scroll-padding-top: calc(52px + 1.6rem);
     }
 
     .viewport {
@@ -781,6 +791,7 @@ body {
     .panel-track {
         display: block;
         transform: none !important;
+        overflow-anchor: none;
     }
 
     .panel {
@@ -793,6 +804,8 @@ body {
         justify-content: flex-start;
         padding: 0 1.6rem;
         border-bottom: 1px solid var(--rail);
+        scroll-margin-top: calc(52px + 1.6rem);
+        overflow-anchor: none;
         transform: none !important;
         transition: none !important;
     }
@@ -881,6 +894,10 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
 
     .app,
     .panel,
