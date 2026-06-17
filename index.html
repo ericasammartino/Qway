@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Qway</title>
+    <meta
+        name="description"
+        content="Official Qway landing page with releases, tour dates, videos, music, merch, and contact information."
+    >
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app" data-active-section="home">
+        <nav id="leftRailNav" class="rail-nav rail-nav-left" aria-label="Opened sections"></nav>
+        <nav id="rightRailNav" class="rail-nav rail-nav-right" aria-label="Upcoming sections"></nav>
+
+        <header class="mobile-topbar" aria-label="Mobile section navigation">
+            <button id="mobileHomeReturn" class="mobile-home-return" type="button">HOME</button>
+            <span id="mobileSectionLabel" class="mobile-section-label">HOME</span>
+        </header>
+
+        <main id="viewport" class="viewport">
+            <section id="home" class="panel hero-panel">
+                <div class="panel-content">
+                    <p class="eyebrow">Official site</p>
+                    <h1>Qway</h1>
+                    <p class="lede">A cinematic landing page for releases, shows, video, audio, merch, and contact.</p>
+                    <a class="primary-link" href="#new-release">Explore the new release</a>
+                </div>
+            </section>
+
+            <section id="new-release" class="panel">
+                <button class="mobile-panel-rail" type="button" data-target="new-release">NEW RELEASE</button>
+                <div class="panel-content">
+                    <p class="eyebrow">New release</p>
+                    <h2>Latest drop</h2>
+                    <p>
+                        Feature the latest single, EP, or album here with artwork, streaming links, and a concise
+                        release story.
+                    </p>
+                    <a class="primary-link" href="#listen">Listen now</a>
+                </div>
+            </section>
+
+            <section id="tour" class="panel">
+                <button class="mobile-panel-rail" type="button" data-target="tour">TOUR</button>
+                <div class="panel-content">
+                    <p class="eyebrow">Tour</p>
+                    <h2>Upcoming dates</h2>
+                    <ul class="event-list" aria-label="Upcoming tour dates">
+                        <li><span>Aug 08</span><strong>New York, NY</strong><em>Venue TBA</em></li>
+                        <li><span>Sep 14</span><strong>Los Angeles, CA</strong><em>Venue TBA</em></li>
+                        <li><span>Oct 19</span><strong>Chicago, IL</strong><em>Venue TBA</em></li>
+                    </ul>
+                </div>
+            </section>
+
+            <section id="watch" class="panel">
+                <button class="mobile-panel-rail" type="button" data-target="watch">WATCH</button>
+                <div class="panel-content">
+                    <p class="eyebrow">Watch</p>
+                    <h2>Visuals</h2>
+                    <p>
+                        Embed official videos, live clips, behind-the-scenes footage, and short-form highlights in
+                        this section.
+                    </p>
+                    <a class="primary-link" href="#contact">Book video inquiries</a>
+                </div>
+            </section>
+
+            <section id="listen" class="panel">
+                <button class="mobile-panel-rail" type="button" data-target="listen">LISTEN</button>
+                <div class="panel-content">
+                    <p class="eyebrow">Listen</p>
+                    <h2>Streaming</h2>
+                    <p>
+                        Add links to Spotify, Apple Music, SoundCloud, Bandcamp, or any other listening platform.
+                    </p>
+                    <div class="link-grid" aria-label="Streaming platforms">
+                        <a href="#listen">Spotify</a>
+                        <a href="#listen">Apple Music</a>
+                        <a href="#listen">SoundCloud</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="merch" class="panel">
+                <button class="mobile-panel-rail" type="button" data-target="merch">MERCH</button>
+                <div class="panel-content">
+                    <p class="eyebrow">Merch</p>
+                    <h2>Shop Qway</h2>
+                    <p>
+                        Showcase apparel, vinyl, limited drops, and bundles with calls to action for each collection.
+                    </p>
+                    <a class="primary-link" href="#contact">Request wholesale info</a>
+                </div>
+            </section>
+
+            <section id="contact" class="panel">
+                <button class="mobile-panel-rail" type="button" data-target="contact">CONTACT</button>
+                <div class="panel-content">
+                    <p class="eyebrow">Contact</p>
+                    <h2>Bookings and press</h2>
+                    <p>
+                        For bookings, press, sync, and partnership inquiries, connect with the Qway team.
+                    </p>
+                    <a class="primary-link" href="mailto:hello@example.com">hello@example.com</a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
