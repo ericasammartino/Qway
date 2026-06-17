@@ -746,13 +746,7 @@ body {
     }
 
     .mobile-section-label {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        pointer-events: none;
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
+        display: none;
     }
 
     .mobile-social-rail.social-rail {
@@ -815,11 +809,14 @@ body {
     }
 
     .panel.is-active .mobile-panel-rail {
-        display: none;
+        position: static;
+        z-index: auto;
+        display: flex;
+        margin-bottom: 1.6rem;
     }
 
     .app:not([data-active-section="home"]) .panel.is-active {
-        padding-top: calc(52px + 1.6rem);
+        padding-top: 0;
     }
 
     #home.panel {
