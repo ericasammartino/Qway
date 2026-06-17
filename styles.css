@@ -905,10 +905,11 @@ body {
     }
 
     .watch-shell .video-card.video-embed {
-        width: calc(100vw - 3.2rem);
+        width: 100vw;
         aspect-ratio: 9 / 16;
-        margin-left: auto;
-        margin-right: auto;
+        border-radius: 0;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
     }
 
     .watch-video-desktop {
@@ -920,7 +921,7 @@ body {
     }
 
     .watch-shell .platform-row {
-        width: calc(100vw - 3.2rem);
+        width: 96vw;
         margin-left: auto;
         margin-right: auto;
         overflow-wrap: anywhere;
