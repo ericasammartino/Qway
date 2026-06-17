@@ -498,9 +498,12 @@ body {
     text-underline-offset: 3px;
 }
 
-.listen-shell,
-.merch-shell {
+.listen-shell {
     max-width: 980px;
+}
+
+.merch-shell {
+    max-width: 620px;
 }
 
 .discography-label {
@@ -570,7 +573,7 @@ body {
 .merch-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1rem 3rem;
+    gap: 1rem 2rem;
 }
 
 .merch-link {
