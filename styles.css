@@ -716,11 +716,8 @@ body {
     }
 
     .app:not([data-active-section="home"]) .mobile-home-return {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 5;
+        position: static;
+        width: 100%;
         display: flex;
         align-items: center;
         justify-content: flex-start;
@@ -774,7 +771,7 @@ body {
     }
 
     html {
-        scroll-padding-top: calc(52px + 1.6rem);
+        scroll-padding-top: 0;
     }
 
     .viewport {
@@ -798,7 +795,7 @@ body {
         justify-content: flex-start;
         padding: 0 1.6rem;
         border-bottom: 1px solid var(--rail);
-        scroll-margin-top: calc(52px + 1.6rem);
+        scroll-margin-top: 0;
         overflow-anchor: none;
         transform: none !important;
         transition: none !important;
