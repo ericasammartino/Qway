@@ -3,10 +3,18 @@ const panels = Array.from(document.querySelectorAll("[data-section]"));
 const controls = Array.from(document.querySelectorAll("[data-section-target]"));
 const mobileSectionLabel = document.querySelector("[data-mobile-section-label]");
 const sectionIds = panels.map((panel) => panel.dataset.section);
+const sectionLabels = {
+    home: "Home",
+    release: "Release",
+    tour: "Tour",
+    watch: "Watch",
+    listen: "Listen",
+    merch: "Merch",
+    contact: "Contact",
+};
 
 function getSectionLabel(sectionId) {
-    const control = controls.find((button) => button.dataset.sectionTarget === sectionId);
-    return control ? control.textContent.trim() : "Home";
+    return sectionLabels[sectionId] || "Home";
 }
 
 function activateSection(sectionId, options = {}) {
@@ -17,11 +25,15 @@ function activateSection(sectionId, options = {}) {
 
     panels.forEach((panel, index) => {
         const isActive = panel.dataset.section === targetId;
+        const panelShell = panel.querySelector(".panel-shell");
 
         panel.classList.toggle("is-active", isActive);
         panel.classList.toggle("parked-left", index < activeIndex);
-        panel.toggleAttribute("inert", !isActive);
-        panel.setAttribute("aria-hidden", String(!isActive));
+
+        if (panelShell) {
+            panelShell.toggleAttribute("inert", !isActive);
+            panelShell.setAttribute("aria-hidden", String(!isActive));
+        }
     });
 
     controls.forEach((control) => {
