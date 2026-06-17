@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Qway</title>
+    <meta name="description" content="Official landing page for Qway music, tour dates, videos, merch, and contact information.">
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <main class="app" data-active-section="home">
+        <aside class="rail rail-left" aria-hidden="true"></aside>
+
+        <button class="mobile-home-return" type="button" data-section-target="home">
+            <span class="mobile-home-return-label">Qway</span>
+            <span class="mobile-section-label" data-mobile-section-label>Home</span>
+        </button>
+
+        <section class="viewport" aria-label="Qway sections">
+            <div class="panel-track">
+                <article class="panel is-active" id="home" data-section="home" aria-labelledby="home-title">
+                    <div class="panel-shell hero-shell">
+                        <img
+                            class="logo"
+                            alt="Qway"
+                            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 980 320'%3E%3Crect width='980' height='320' fill='%23f1f0ec'/%3E%3Ctext x='490' y='205' fill='%231d1d1d' font-family='Georgia, serif' font-size='190' font-style='italic' text-anchor='middle'%3EQway%3C/text%3E%3C/svg%3E">
+                        <h1 class="tagline" id="home-title">New music, tour dates, and official merch.</h1>
+                        <div class="cta-row">
+                            <a class="btn btn-primary" href="#release" data-section-target="release">Latest release</a>
+                            <a class="btn btn-outline" href="#tour" data-section-target="tour">Tour dates</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel" id="release" data-section="release" aria-labelledby="release-title">
+                    <button class="rail-tab mobile-panel-rail" type="button" data-section-target="release">Release</button>
+                    <div class="panel-shell release-shell">
+                        <div class="release-left">
+                            <h2 class="release-title" id="release-title">Red<br>Letters</h2>
+                            <div class="release-meta">
+                                <p class="release-date">Out now</p>
+                                <a class="btn compact btn-primary" href="#listen" data-section-target="listen">Listen now</a>
+                            </div>
+                        </div>
+                        <div class="release-right">
+                            <img
+                                class="release-cover"
+                                alt="Red Letters cover art placeholder"
+                                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 800'%3E%3Crect width='800' height='800' fill='%23e32832'/%3E%3Ccircle cx='400' cy='400' r='235' fill='%23f1f0ec'/%3E%3Ctext x='400' y='390' fill='%231d1d1d' font-family='Georgia, serif' font-size='92' font-style='italic' text-anchor='middle'%3ERed%3C/text%3E%3Ctext x='400' y='495' fill='%231d1d1d' font-family='Georgia, serif' font-size='92' font-style='italic' text-anchor='middle'%3ELetters%3C/text%3E%3C/svg%3E">
+                            <div class="release-notes-wrap">
+                                <p class="release-copy">A cinematic new single built around intimate vocals, live drums, and a chorus made for late-night drives.</p>
+                                <a class="text-link" href="#watch" data-section-target="watch">Watch the video</a>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel" id="tour" data-section="tour" aria-labelledby="tour-title">
+                    <button class="rail-tab mobile-panel-rail" type="button" data-section-target="tour">Tour</button>
+                    <div class="panel-shell tour-shell">
+                        <div class="tour-shell-title">
+                            <h2 class="section-title" id="tour-title">Tour</h2>
+                            <p class="section-kicker">Select dates</p>
+                        </div>
+                        <div class="tour-list">
+                            <div class="tour-row">
+                                <span class="tour-date">Jul 12</span>
+                                <span class="tour-venue">The Regent - Los Angeles, CA</span>
+                                <a class="btn tiny btn-outline" href="#">Tickets</a>
+                            </div>
+                            <div class="tour-row">
+                                <span class="tour-date">Aug 03</span>
+                                <span class="tour-venue">Metro - Chicago, IL</span>
+                                <a class="btn tiny btn-outline" href="#">Tickets</a>
+                            </div>
+                            <div class="tour-row">
+                                <span class="tour-date">Sep 18</span>
+                                <span class="tour-venue">Webster Hall - New York, NY</span>
+                                <a class="btn tiny btn-outline" href="#">Tickets</a>
+                            </div>
+                        </div>
+                        <a class="btn compact btn-primary subscribe-btn" href="#contact" data-section-target="contact">Get updates</a>
+                    </div>
+                </article>
+
+                <article class="panel" id="watch" data-section="watch" aria-labelledby="watch-title">
+                    <button class="rail-tab mobile-panel-rail" type="button" data-section-target="watch">Watch</button>
+                    <div class="panel-shell watch-shell">
+                        <h2 class="section-title" id="watch-title">Watch</h2>
+                        <p class="watch-subtitle">Red Letters - Official Visual</p>
+                        <div class="video-card video-embed">
+                            <iframe
+                                title="Qway video placeholder"
+                                src="about:blank"
+                                loading="lazy"
+                                allowfullscreen></iframe>
+                        </div>
+                        <p class="platform-row">Follow on <a href="#">YouTube</a>, <a href="#">Instagram</a>, and <a href="#">TikTok</a>.</p>
+                    </div>
+                </article>
+
+                <article class="panel" id="listen" data-section="listen" aria-labelledby="listen-title">
+                    <button class="rail-tab mobile-panel-rail" type="button" data-section-target="listen">Listen</button>
+                    <div class="panel-shell listen-shell">
+                        <h2 class="section-title" id="listen-title">Listen</h2>
+                        <p class="section-kicker">Discography</p>
+                        <p class="discography-label">Featured releases</p>
+                        <div class="release-grid-shell">
+                            <div class="release-grid">
+                                <article class="release-card">
+                                    <img alt="Red Letters album art" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%23e32832'/%3E%3Ctext x='300' y='320' fill='%23fff' font-family='Georgia, serif' font-size='70' text-anchor='middle'%3ERed Letters%3C/text%3E%3C/svg%3E">
+                                    <h3><i aria-hidden="true">play</i>Red Letters</h3>
+                                    <p>Single</p>
+                                </article>
+                                <article class="release-card">
+                                    <img alt="Night Rail album art" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%231d1d1d'/%3E%3Ctext x='300' y='320' fill='%23f1f0ec' font-family='Georgia, serif' font-size='70' text-anchor='middle'%3ENight Rail%3C/text%3E%3C/svg%3E">
+                                    <h3><i aria-hidden="true">play</i>Night Rail</h3>
+                                    <p>EP</p>
+                                </article>
+                                <article class="release-card">
+                                    <img alt="Soft Static album art" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%23727272'/%3E%3Ctext x='300' y='320' fill='%23fff' font-family='Georgia, serif' font-size='70' text-anchor='middle'%3ESoft Static%3C/text%3E%3C/svg%3E">
+                                    <h3><i aria-hidden="true">play</i>Soft Static</h3>
+                                    <p>Album</p>
+                                </article>
+                            </div>
+                            <a class="btn compact btn-primary" href="#">Stream everywhere</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel" id="merch" data-section="merch" aria-labelledby="merch-title">
+                    <button class="rail-tab mobile-panel-rail" type="button" data-section-target="merch">Merch</button>
+                    <div class="panel-shell merch-shell">
+                        <h2 class="section-title" id="merch-title">Merch</h2>
+                        <p class="section-kicker">Limited pieces</p>
+                        <div class="merch-grid">
+                            <a class="merch-card" href="#">
+                                <img alt="Red Letters tee" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect width='500' height='500' fill='%23f1f0ec'/%3E%3Cpath d='M155 120h190l50 75-60 35v180H165V230l-60-35z' fill='%231d1d1d'/%3E%3Ctext x='250' y='275' fill='%23e32832' font-family='Georgia, serif' font-size='44' text-anchor='middle'%3EQway%3C/text%3E%3C/svg%3E">
+                                <h3 class="merch-card-title">Red Letters Tee</h3>
+                                <p>$35</p>
+                            </a>
+                            <a class="merch-card" href="#">
+                                <img alt="Tour poster" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Crect width='500' height='500' fill='%23f1f0ec'/%3E%3Crect x='150' y='70' width='200' height='340' fill='%23e32832'/%3E%3Ctext x='250' y='250' fill='%23fff' font-family='Georgia, serif' font-size='54' text-anchor='middle'%3ETour%3C/text%3E%3C/svg%3E">
+                                <h3 class="merch-card-title">Tour Poster</h3>
+                                <p>$25</p>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="panel" id="contact" data-section="contact" aria-labelledby="contact-title">
+                    <button class="rail-tab mobile-panel-rail" type="button" data-section-target="contact">Contact</button>
+                    <div class="panel-shell contact-shell">
+                        <div>
+                            <h2 class="section-title" id="contact-title">Contact</h2>
+                            <p class="contact-heading">Booking, press, and collaboration inquiries.</p>
+                            <p class="contact-meta">Management</p>
+                            <a class="contact-email" href="mailto:hello@example.com">hello@example.com</a>
+                            <p class="contact-meta">Press</p>
+                            <a class="contact-email" href="mailto:press@example.com">press@example.com</a>
+                        </div>
+                        <div class="contact-collage" aria-hidden="true">
+                            <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 220'%3E%3Crect width='500' height='220' fill='%23e32832'/%3E%3C/svg%3E">
+                            <img alt="" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 220'%3E%3Crect width='500' height='220' fill='%231d1d1d'/%3E%3C/svg%3E">
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <aside class="rail rail-right" aria-label="Section navigation">
+            <nav class="rail-nav" aria-label="Main sections">
+                <button class="rail-tab" type="button" data-section-target="release">Release</button>
+                <button class="rail-tab" type="button" data-section-target="tour">Tour</button>
+                <button class="rail-tab" type="button" data-section-target="watch">Watch</button>
+                <button class="rail-tab" type="button" data-section-target="listen">Listen</button>
+                <button class="rail-tab" type="button" data-section-target="merch">Merch</button>
+                <button class="rail-tab" type="button" data-section-target="contact">Contact</button>
+            </nav>
+            <div class="social-rail" aria-label="Social links">
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TT</a>
+                <a href="#" aria-label="YouTube">YT</a>
+                <a href="#" aria-label="Spotify">SP</a>
+            </div>
+        </aside>
+
+        <div class="mobile-social-rail social-rail" aria-label="Social links">
+            <a href="#" aria-label="Instagram">IG</a>
+            <a href="#" aria-label="TikTok">TT</a>
+            <a href="#" aria-label="YouTube">YT</a>
+            <a href="#" aria-label="Spotify">SP</a>
+        </div>
+    </main>
+</body>
+</html>
