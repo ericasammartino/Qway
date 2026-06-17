@@ -856,6 +856,7 @@ body {
     .tour-list {
         gap: 1rem;
         margin-bottom: 1.2rem;
+        width: 96vw;
     }
 
     .tour-row {
@@ -871,6 +872,7 @@ body {
     .tour-venue {
         font-size: clamp(1.7rem, 7vw, 2.35rem);
         line-height: 1.05;
+        letter-spacing: 3px;
     }
 
     .tour-venue-name,
