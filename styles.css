@@ -720,7 +720,7 @@ body {
         width: 100%;
         display: flex;
         align-items: center;
-        justify-content: flex-start;
+        justify-content: center;
         height: 52px;
         padding: 0 1.6rem;
         background: var(--bg);
