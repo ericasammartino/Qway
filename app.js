@@ -442,8 +442,16 @@
 
         const panelRect = activePanel.getBoundingClientRect();
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const reachedPanelEnd = panelRect.bottom <= viewportHeight + 8;
-        const reachedPanelStart = panelRect.top >= -8;
+        const nextPanel = panels[activeIndex + 1];
+        const previousPanel = panels[activeIndex - 1];
+        const nextPanelRect = nextPanel ? nextPanel.getBoundingClientRect() : null;
+        const previousPanelRect = previousPanel ? previousPanel.getBoundingClientRect() : null;
+        const reachedPanelEnd =
+            panelRect.bottom <= viewportHeight + 96 ||
+            (nextPanelRect && nextPanelRect.top <= viewportHeight - 24);
+        const reachedPanelStart =
+            panelRect.top >= -96 ||
+            (previousPanelRect && previousPanelRect.bottom >= 24);
 
         if (scrollingDown && activeIndex < panels.length - 1 && reachedPanelEnd) {
             scheduleMobilePanelChange(activeIndex + 1);
