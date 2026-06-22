@@ -368,25 +368,21 @@
     }
 
     function handleWheel(event) {
+        const desktop = isDesktop();
+        if (!desktop) return;
         if (scrollLocked) return;
 
         const delta =
             Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
         if (Math.abs(delta) < 14) return;
 
-        const desktop = isDesktop();
-        if (desktop) {
-            event.preventDefault();
-        }
+        event.preventDefault();
         scrollLocked = true;
 
         const direction = delta > 0 ? 1 : -1;
         const nextIndex = clampIndex(activeIndex + direction);
         if (nextIndex !== activeIndex) {
             setActive(nextIndex);
-            if (!desktop) {
-                scrollPanelIntoView(nextIndex);
-            }
         }
 
         window.setTimeout(() => {
@@ -421,17 +417,9 @@
             return;
         }
 
-        // Mobile: vertical swipe navigates one section at a time, mirroring
-        // the desktop wheel/click model. Up-swipe -> next, down-swipe ->
-        // previous. The new active section is then scrolled into view so
-        // the page reflows around it.
-        if (Math.abs(deltaY) < 42 || Math.abs(deltaY) < Math.abs(deltaX)) return;
-        const direction = deltaY < 0 ? 1 : -1;
-        const nextIndex = clampIndex(activeIndex + direction);
-        if (nextIndex !== activeIndex) {
-            setActive(nextIndex);
-            scrollPanelIntoView(nextIndex);
-        }
+        // Mobile uses native vertical scrolling so long active sections can
+        // be read to the end. Section changes happen through rail taps,
+        // the HOME bar, or hash links.
     }
 
     function handleMobileRailScroll() {
