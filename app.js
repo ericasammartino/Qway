@@ -34,6 +34,7 @@
     let touchStartY = 0;
     let cleanupTimerId = null;
     let mobileScrollFrameId = null;
+    let lastWindowScrollY = window.scrollY || 0;
 
     const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
     const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -61,10 +62,15 @@
 
     function scrollPanelIntoView(index) {
         if (!isDesktop() && panels[index]) {
+            scrollLocked = true;
             panels[index].scrollIntoView({
                 behavior: prefersReducedMotion() ? "auto" : "smooth",
                 block: "start",
             });
+            window.setTimeout(() => {
+                scrollLocked = false;
+                lastWindowScrollY = window.scrollY || 0;
+            }, prefersReducedMotion() ? 0 : 650);
         }
     }
 
@@ -423,14 +429,25 @@
     }
 
     function handleMobileRailScroll() {
-        // Scroll-based auto-activation has been disabled. With non-sticky
-        // rails and collapse-on-flip, switching the active section while
-        // the user was scrolling produced a layout shift that immediately
-        // pushed the next rail under the activation threshold, triggering
-        // another flip, which collapsed the new section and re-anchored
-        // the scroll, and so on. Sections now switch only when the user
-        // taps a rail, taps the HOME bar, or follows a #hash link --
-        // mirroring the desktop's click/wheel discrete-step model.
+        const currentScrollY = window.scrollY || 0;
+        const scrollingDown = currentScrollY > lastWindowScrollY;
+        lastWindowScrollY = currentScrollY;
+
+        if (isDesktop() || scrollLocked || !scrollingDown) return;
+        if (activeIndex >= panels.length - 1) return;
+
+        const activePanel = panels[activeIndex];
+        if (!activePanel) return;
+
+        const panelRect = activePanel.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const reachedPanelEnd = panelRect.bottom <= viewportHeight + 8;
+
+        if (!reachedPanelEnd) return;
+
+        const nextIndex = activeIndex + 1;
+        setActive(nextIndex);
+        scrollPanelIntoView(nextIndex);
     }
 
     function handleScroll() {
