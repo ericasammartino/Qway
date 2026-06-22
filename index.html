@@ -12,12 +12,6 @@
 
 <body>
     <div class="app" data-active-section="home">
-        <button type="button" id="mobileHomeReturn" class="mobile-home-return" data-target="home"
-            aria-label="Return to home">
-            <span class="mobile-home-return-label">HOME</span>
-            <span class="mobile-section-label" id="mobileSectionLabel" aria-hidden="true"></span>
-        </button>
-
         <aside class="rail rail-left">
             <nav id="leftRailNav" class="rail-nav" aria-label="Opened" aria-hidden="true" sections></nav>
         </aside>
@@ -48,6 +42,12 @@
                             class="fa-brands fa-bandcamp"></i></a>
                     <a href="mailto:qwayband@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                 </div>
+
+                <button type="button" id="mobileHomeReturn" class="mobile-home-return" data-target="home"
+                    aria-label="Return to home">
+                    <span class="mobile-home-return-label">HOME</span>
+                    <span class="mobile-section-label" id="mobileSectionLabel" aria-hidden="true"></span>
+                </button>
 
                 <section class="panel" id="new-release" aria-hidden="true" inert>
                     <button type="button" class="mobile-panel-rail rail-tab" data-target="new-release">
