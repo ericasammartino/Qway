@@ -36,6 +36,7 @@
     let mobileScrollFrameId = null;
     let mobilePanelChangeTimerId = null;
     let lastWindowScrollY = window.scrollY || 0;
+    let lastMobileScrollDirection = 0;
 
     const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
     const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -427,15 +428,37 @@
         // Mobile uses native vertical scrolling so long active sections can
         // be read to the end. Section changes happen through rail taps,
         // the HOME bar, or hash links.
+        const mobileDirection =
+            Math.abs(deltaY) >= 8 && Math.abs(deltaY) >= Math.abs(deltaX)
+                ? deltaY < 0 ? 1 : -1
+                : 0;
+
+        if (mobileDirection) {
+            lastMobileScrollDirection = mobileDirection;
+            window.setTimeout(() => {
+                checkMobilePanelBoundary(mobileDirection);
+            }, 140);
+        }
     }
 
     function handleMobileRailScroll() {
         const currentScrollY = window.scrollY || 0;
-        const scrollingDown = currentScrollY > lastWindowScrollY;
-        const scrollingUp = currentScrollY < lastWindowScrollY;
+        const scrollDelta = currentScrollY - lastWindowScrollY;
         lastWindowScrollY = currentScrollY;
 
-        if (isDesktop() || scrollLocked || (!scrollingDown && !scrollingUp)) return;
+        if (scrollDelta > 0) {
+            lastMobileScrollDirection = 1;
+        } else if (scrollDelta < 0) {
+            lastMobileScrollDirection = -1;
+        } else {
+            return;
+        }
+
+        checkMobilePanelBoundary(lastMobileScrollDirection);
+    }
+
+    function checkMobilePanelBoundary(direction) {
+        if (isDesktop() || scrollLocked || !direction) return;
 
         const activePanel = panels[activeIndex];
         if (!activePanel) return;
@@ -453,12 +476,12 @@
             panelRect.top >= -96 ||
             (previousPanelRect && previousPanelRect.bottom >= 24);
 
-        if (scrollingDown && activeIndex < panels.length - 1 && reachedPanelEnd) {
+        if (direction > 0 && activeIndex < panels.length - 1 && reachedPanelEnd) {
             scheduleMobilePanelChange(activeIndex + 1);
             return;
         }
 
-        if (scrollingUp && activeIndex > 0 && reachedPanelStart) {
+        if (direction < 0 && activeIndex > 0 && reachedPanelStart) {
             scheduleMobilePanelChange(activeIndex - 1);
         }
     }
