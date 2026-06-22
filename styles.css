@@ -45,6 +45,10 @@
     --right-rail-width: 370px;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -53,10 +57,6 @@ html,
 body {
     margin: 0;
     height: 100%;
-}
-
-html {
-    scroll-behavior: smooth;
 }
 
 body {
@@ -629,7 +629,7 @@ body {
 
 .merch-link:hover .merch-card,
 .merch-link:focus-visible .merch-card {
-    transform: scale(1.04);
+    transform: scale(1.1);
 }
 
 .contact-shell {
@@ -680,6 +680,16 @@ body {
 }
 
 @media (max-width: 960px) {
+    body {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior-y: contain;
+    }
+
+    html {
+        scroll-padding-top: 0;
+    }
+
     .app {
         display: flex;
         flex-direction: column;
@@ -729,11 +739,14 @@ body {
     }
 
     .app:not([data-active-section="home"]) .mobile-home-return {
-        position: static;
-        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 5;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         height: 52px;
         padding: 0 1.6rem;
         background: var(--bg);
@@ -779,12 +792,6 @@ body {
 
     body {
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
-        overscroll-behavior-y: contain;
-    }
-
-    html {
-        scroll-padding-top: 0;
     }
 
     .viewport {
@@ -825,8 +832,21 @@ body {
         margin-bottom: 1.6rem;
     }
 
-    .app:not([data-active-section="home"]) .panel.is-active {
-        padding-top: 0;
+    .app:not([data-active-section="home"]) .mobile-home-return {
+        position: static;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 52px;
+        padding: 0 1.6rem;
+        background: var(--bg);
+        border: 0;
+        border-bottom: 1px solid var(--rail);
+        color: var(--muted);
+        font: inherit;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        cursor: pointer;
     }
 
     #home.panel {
@@ -897,11 +917,6 @@ body {
         justify-self: center;
         transform: rotate(90deg);
         transform-origin: center;
-    }
-
-    .watch-shell {
-        width: 100%;
-        max-width: none;
     }
 
     .watch-shell .video-card.video-embed {
