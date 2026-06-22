@@ -34,6 +34,7 @@
     let touchStartY = 0;
     let cleanupTimerId = null;
     let mobileScrollFrameId = null;
+    let mobilePanelChangeTimerId = null;
     let lastWindowScrollY = window.scrollY || 0;
 
     const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
@@ -431,10 +432,10 @@
     function handleMobileRailScroll() {
         const currentScrollY = window.scrollY || 0;
         const scrollingDown = currentScrollY > lastWindowScrollY;
+        const scrollingUp = currentScrollY < lastWindowScrollY;
         lastWindowScrollY = currentScrollY;
 
-        if (isDesktop() || scrollLocked || !scrollingDown) return;
-        if (activeIndex >= panels.length - 1) return;
+        if (isDesktop() || scrollLocked || (!scrollingDown && !scrollingUp)) return;
 
         const activePanel = panels[activeIndex];
         if (!activePanel) return;
@@ -442,12 +443,27 @@
         const panelRect = activePanel.getBoundingClientRect();
         const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
         const reachedPanelEnd = panelRect.bottom <= viewportHeight + 8;
+        const reachedPanelStart = panelRect.top >= -8;
 
-        if (!reachedPanelEnd) return;
+        if (scrollingDown && activeIndex < panels.length - 1 && reachedPanelEnd) {
+            scheduleMobilePanelChange(activeIndex + 1);
+            return;
+        }
 
-        const nextIndex = activeIndex + 1;
-        setActive(nextIndex);
-        scrollPanelIntoView(nextIndex);
+        if (scrollingUp && activeIndex > 0 && reachedPanelStart) {
+            scheduleMobilePanelChange(activeIndex - 1);
+        }
+    }
+
+    function scheduleMobilePanelChange(index) {
+        if (mobilePanelChangeTimerId) return;
+
+        scrollLocked = true;
+        mobilePanelChangeTimerId = window.setTimeout(() => {
+            mobilePanelChangeTimerId = null;
+            setActive(index);
+            scrollPanelIntoView(index);
+        }, prefersReducedMotion() ? 0 : 220);
     }
 
     function handleScroll() {
