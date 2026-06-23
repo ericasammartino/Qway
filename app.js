@@ -35,6 +35,7 @@
     let cleanupTimerId = null;
     let mobileScrollFrameId = null;
     let mobilePanelChangeTimerId = null;
+    let mobileScrollUnlockTimerId = null;
     let lastWindowScrollY = window.scrollY || 0;
     let lastMobileScrollDirection = 0;
 
@@ -51,29 +52,37 @@
         tab.setAttribute("aria-label", section.label);
         tab.addEventListener("click", () => {
             setActive(index);
-
-            if (!isDesktop() && panels[index]) {
-                panels[index].scrollIntoView({
-                    behavior: prefersReducedMotion() ? "auto" : "smooth",
-                    block: "start",
-                });
-            }
+            scrollPanelIntoView(index);
         });
         return tab;
     }
 
     function scrollPanelIntoView(index) {
-        if (!isDesktop() && panels[index]) {
-            scrollLocked = true;
-            panels[index].scrollIntoView({
-                behavior: prefersReducedMotion() ? "auto" : "smooth",
-                block: "start",
-            });
-            window.setTimeout(() => {
-                scrollLocked = false;
-                lastWindowScrollY = window.scrollY || 0;
-            }, prefersReducedMotion() ? 0 : 650);
+        if (isDesktop() || !panels[index]) return;
+
+        scrollLocked = true;
+        if (mobileScrollUnlockTimerId) {
+            window.clearTimeout(mobileScrollUnlockTimerId);
         }
+
+        // Let the active/inactive panel classes update layout before starting
+        // the programmatic scroll. This avoids the mobile "hit then bounce"
+        // effect caused by scrolling to a target while the page height changes.
+        window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
+                const panelTop = panels[index].getBoundingClientRect().top + window.scrollY;
+                window.scrollTo({
+                    top: Math.max(0, panelTop),
+                    behavior: prefersReducedMotion() ? "auto" : "smooth",
+                });
+
+                mobileScrollUnlockTimerId = window.setTimeout(() => {
+                    scrollLocked = false;
+                    lastWindowScrollY = window.scrollY || 0;
+                    mobileScrollUnlockTimerId = null;
+                }, prefersReducedMotion() ? 80 : 760);
+            });
+        });
     }
 
     function bindMobileRails() {
