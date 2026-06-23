@@ -33,11 +33,8 @@
     let touchStartX = 0;
     let touchStartY = 0;
     let cleanupTimerId = null;
-    let mobileScrollFrameId = null;
-    let mobilePanelChangeTimerId = null;
     let mobileScrollUnlockTimerId = null;
     let lastWindowScrollY = window.scrollY || 0;
-    let lastMobileScrollDirection = 0;
 
     const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
     const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -324,7 +321,6 @@
     function handleResize() {
         updateA11y();
         updateMobilePanelStyles();
-        handleMobileRailScroll();
     }
 
     function updateMobilePanelStyles() {
@@ -437,82 +433,6 @@
         // Mobile uses native vertical scrolling so long active sections can
         // be read to the end. Section changes happen through rail taps,
         // the HOME bar, or hash links.
-        const mobileDirection =
-            Math.abs(deltaY) >= 8 && Math.abs(deltaY) >= Math.abs(deltaX)
-                ? deltaY < 0 ? 1 : -1
-                : 0;
-
-        if (mobileDirection) {
-            lastMobileScrollDirection = mobileDirection;
-            window.setTimeout(() => {
-                checkMobilePanelBoundary(mobileDirection);
-            }, 140);
-        }
-    }
-
-    function handleMobileRailScroll() {
-        const currentScrollY = window.scrollY || 0;
-        const scrollDelta = currentScrollY - lastWindowScrollY;
-        lastWindowScrollY = currentScrollY;
-
-        if (scrollDelta > 0) {
-            lastMobileScrollDirection = 1;
-        } else if (scrollDelta < 0) {
-            lastMobileScrollDirection = -1;
-        } else {
-            return;
-        }
-
-        checkMobilePanelBoundary(lastMobileScrollDirection);
-    }
-
-    function checkMobilePanelBoundary(direction) {
-        if (isDesktop() || scrollLocked || !direction) return;
-
-        const activePanel = panels[activeIndex];
-        if (!activePanel) return;
-
-        const panelRect = activePanel.getBoundingClientRect();
-        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-        const nextPanel = panels[activeIndex + 1];
-        const previousPanel = panels[activeIndex - 1];
-        const nextPanelRect = nextPanel ? nextPanel.getBoundingClientRect() : null;
-        const previousPanelRect = previousPanel ? previousPanel.getBoundingClientRect() : null;
-        const reachedPanelEnd =
-            panelRect.bottom <= viewportHeight + 96 ||
-            (nextPanelRect && nextPanelRect.top <= viewportHeight - 24);
-        const reachedPanelStart =
-            panelRect.top >= -96 ||
-            (previousPanelRect && previousPanelRect.bottom >= 24);
-
-        if (direction > 0 && activeIndex < panels.length - 1 && reachedPanelEnd) {
-            scheduleMobilePanelChange(activeIndex + 1);
-            return;
-        }
-
-        if (direction < 0 && activeIndex > 0 && reachedPanelStart) {
-            scheduleMobilePanelChange(activeIndex - 1);
-        }
-    }
-
-    function scheduleMobilePanelChange(index) {
-        if (mobilePanelChangeTimerId) return;
-
-        scrollLocked = true;
-        mobilePanelChangeTimerId = window.setTimeout(() => {
-            mobilePanelChangeTimerId = null;
-            setActive(index);
-            scrollPanelIntoView(index);
-        }, prefersReducedMotion() ? 0 : 220);
-    }
-
-    function handleScroll() {
-        if (mobileScrollFrameId) return;
-
-        mobileScrollFrameId = window.requestAnimationFrame(() => {
-            mobileScrollFrameId = null;
-            handleMobileRailScroll();
-        });
     }
 
     document.addEventListener("click", (event) => {
@@ -535,7 +455,6 @@
     if (viewport) {
         viewport.addEventListener("wheel", handleWheel, { passive: false });
     }
-    window.addEventListener("scroll", handleScroll, { passive: true });
     if (mobileHomeReturn) {
         mobileHomeReturn.addEventListener("click", () => {
             setActive(0);
