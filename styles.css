@@ -642,6 +642,12 @@ body {
     transform: scale(1.1);
 }
 
+.merch-shop-btn {
+    display: flex;
+    margin: 1.2rem auto 0;
+    width: min(210px, 100%);
+}
+
 .contact-shell {
     display: grid;
     grid-template-columns: 1fr minmax(260px, 36%);
