@@ -644,7 +644,7 @@ body {
 
 .merch-shop-btn {
     display: flex;
-    margin: 1.2rem auto 0;
+    margin: 2rem auto 0;
     width: min(210px, 100%);
 }
 
