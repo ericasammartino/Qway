@@ -130,17 +130,19 @@ body {
     position: absolute;
     left: 50%;
     bottom: 12px;
-    width: 2px;
-    height: 0;
-    background: var(--accent);
-    transform: translateX(-50%);
-    transition: height 220ms ease;
-    border-radius: 999px;
+    width: 16px;
+    height: 20px;
+    background: url("Tear-Drop-red.png") center / contain no-repeat;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.8);
+    transform-origin: center;
+    transition: opacity 220ms ease, transform 220ms ease;
 }
 
 .rail-tab:hover::after,
 .rail-tab.active::after {
-    height: 22px;
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
 }
 
 .rail-tab:focus-visible,
@@ -759,15 +761,15 @@ body {
     .mobile-panel-rail::after {
         left: 50%;
         bottom: 7px;
-        width: 0;
-        height: 2px;
-        transition: width 220ms ease;
+        width: 14px;
+        height: 18px;
+        transition: opacity 220ms ease, transform 220ms ease;
     }
 
     .mobile-panel-rail:hover::after,
     .mobile-panel-rail.active::after {
-        width: 22px;
-        height: 2px;
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
     }
 
     .app:not([data-active-section="home"]) .mobile-home-return {
