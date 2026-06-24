@@ -885,12 +885,12 @@ body {
 
     .hero-shell .cta-row {
         flex-wrap: nowrap;
-        width: 100%;
+        width: min(100%, 22rem);
     }
 
     .hero-shell .cta-row .btn {
         flex: 1 1 0;
-        min-width: 0;
+        min-width: 9.5rem;
         padding: 0;
     }
 
