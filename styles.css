@@ -522,6 +522,10 @@ body {
     text-underline-offset: 3px;
 }
 
+.listen-shell .platform-row {
+    text-align: center;
+}
+
 .listen-shell {
     max-width: 980px;
 }
