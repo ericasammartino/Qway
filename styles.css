@@ -759,17 +759,7 @@ body {
     }
 
     .mobile-panel-rail::after {
-        left: 50%;
-        bottom: 7px;
-        width: 22px;
-        height: 27px;
-        transition: opacity 220ms ease, transform 220ms ease;
-    }
-
-    .mobile-panel-rail:hover::after,
-    .mobile-panel-rail.active::after {
-        opacity: 1;
-        transform: translateX(-50%) rotate(180deg) scale(1);
+        display: none;
     }
 
     .app:not([data-active-section="home"]) .mobile-home-return {
