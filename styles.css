@@ -646,7 +646,12 @@ body {
     display: grid;
     grid-template-columns: 1fr minmax(260px, 36%);
     gap: 2rem;
-    align-items: center;
+    align-items: stretch;
+    height: 100%;
+}
+
+.contact-copy {
+    align-self: center;
 }
 
 .contact-heading {
@@ -669,13 +674,24 @@ body {
     display: grid;
     gap: 0;
     overflow: hidden;
+    height: 100%;
 }
 
 .contact-collage img {
     width: 100%;
+    height: 100%;
     display: block;
     object-fit: cover;
-    min-height: 128px;
+    min-height: 0;
+}
+
+.contact-social-rail.social-rail {
+    display: none;
+}
+
+#contact.panel {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 @media (max-width: 1200px) {
@@ -1011,6 +1027,36 @@ body {
 
     .contact-shell {
         grid-template-columns: 1fr;
+        height: auto;
+        align-items: center;
+    }
+
+    .contact-collage {
+        width: 100vw;
+        height: auto;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+    }
+
+    .contact-collage img {
+        width: 100%;
+        height: auto;
+        min-height: 0;
+    }
+
+    .contact-social-rail.social-rail {
+        width: 100vw;
+        min-height: 48px;
+        flex: 0 0 48px;
+        display: flex;
+        flex-direction: row;
+        border-left: 0;
+        border-bottom: 1px solid var(--rail);
+        border-top: 1px solid var(--rail);
+        padding: 0 0.8rem;
+        gap: 0.8rem;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
     }
 
     .release-grid {
