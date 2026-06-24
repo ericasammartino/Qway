@@ -274,7 +274,7 @@ body {
 .btn {
     min-width: 210px;
     height: 56px;
-    padding: 0 1.7rem;
+    padding: 0;
     border-radius: 999px;
     border: 2px solid var(--accent);
     display: inline-flex;
