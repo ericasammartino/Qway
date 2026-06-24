@@ -953,7 +953,8 @@ body {
         display: block;
     }
 
-    .watch-shell .platform-row {
+    .watch-shell .platform-row,
+    .listen-shell .platform-row {
         width: 96vw;
         margin-left: calc(50% - 48vw);
         margin-right: calc(50% - 48vw);
