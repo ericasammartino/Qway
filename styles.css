@@ -708,6 +708,42 @@ body {
     padding-bottom: 0;
 }
 
+@media (min-width: 1400px) and (min-height: 760px) {
+    body {
+        display: grid;
+        place-items: center;
+        background: #eaf1f8;
+    }
+
+    .app {
+        width: min(calc(100vw - 4rem), 1480px);
+        height: min(calc(100dvh - 4rem), 900px);
+        box-shadow: 0 0 0 1px rgba(29, 29, 29, 0.08);
+    }
+
+    .rail {
+        min-height: 100%;
+    }
+
+    .panel {
+        min-height: 100%;
+        padding: clamp(2rem, 3.5vw, 4rem);
+    }
+
+    .panel-shell {
+        width: min(920px, 90%);
+    }
+
+    .contact-shell,
+    .contact-collage {
+        height: 100%;
+    }
+
+    .contact-collage img {
+        max-height: 100%;
+    }
+}
+
 @media (max-width: 1200px) {
     .panel {
         padding: 2rem;
