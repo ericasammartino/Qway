@@ -659,7 +659,7 @@ body {
 
 .contact-shell {
     display: grid;
-    grid-template-columns: minmax(18rem, 1fr) minmax(260px, 38%);
+    grid-template-columns: minmax(18rem, 1fr) auto;
     gap: clamp(2rem, 5vw, 6rem);
     align-items: stretch;
     width: 100%;
@@ -693,14 +693,15 @@ body {
     display: grid;
     gap: 0;
     justify-self: end;
-    overflow: hidden;
+    overflow: visible;
     height: 100%;
     place-items: center;
 }
 
 .contact-collage img {
-    width: 100%;
+    width: auto;
     height: 100%;
+    max-width: min(48vw, 44rem);
     display: block;
     object-fit: contain;
     min-height: 0;
