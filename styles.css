@@ -670,6 +670,7 @@ body {
 .contact-copy {
     align-self: center;
     justify-self: center;
+    width: min(24rem, 100%);
 }
 
 .contact-heading {
@@ -718,6 +719,10 @@ body {
 @media (min-width: 961px) {
     #contact.panel {
         padding: 0;
+    }
+
+    .contact-shell {
+        padding-left: clamp(3rem, 7vw, 8rem);
     }
 }
 
@@ -783,9 +788,14 @@ body {
     }
 
     .contact-shell {
-        grid-template-columns: minmax(18rem, 1fr) auto;
-        gap: clamp(2rem, 4vw, 5rem);
+        grid-template-columns: minmax(24rem, 1fr) auto;
+        gap: clamp(3rem, 5vw, 6rem);
         width: 100%;
+    }
+
+    .contact-copy {
+        justify-self: center;
+        width: min(25rem, 100%);
     }
 
     .contact-shell,
@@ -797,7 +807,7 @@ body {
         width: auto;
         height: 100%;
         max-height: 100%;
-        max-width: min(54vw, 56rem);
+        max-width: min(44vw, 42rem);
         object-fit: contain;
     }
 }
