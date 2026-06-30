@@ -746,6 +746,18 @@ body {
         width: min(920px, 90%);
     }
 
+    .btn {
+        padding: 0 1.35rem;
+    }
+
+    .btn.compact {
+        padding: 0 1.5rem;
+    }
+
+    .btn.tiny {
+        padding: 0 0.9rem;
+    }
+
     .tour-shell {
         max-width: 860px;
         gap: clamp(2rem, 4vh, 3rem);
@@ -758,11 +770,11 @@ body {
     .tour-row {
         height: 8rem;
         min-height: 4.75rem;
-        grid-template-columns: 5rem minmax(0, 1fr) 8.75rem;
+        grid-template-columns: 5rem minmax(0, 1fr) 9.5rem;
     }
 
     .tour-row .btn.tiny {
-        width: 8.75rem;
+        width: 9.5rem;
     }
 
     .subscribe-btn {
