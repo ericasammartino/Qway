@@ -658,14 +658,17 @@ body {
 
 .contact-shell {
     display: grid;
-    grid-template-columns: 1fr minmax(260px, 36%);
-    gap: 2rem;
+    grid-template-columns: minmax(18rem, 1fr) auto;
+    gap: clamp(2rem, 5vw, 6rem);
     align-items: stretch;
+    width: 100%;
+    max-width: none;
     height: 100%;
 }
 
 .contact-copy {
     align-self: center;
+    justify-self: center;
 }
 
 .contact-heading {
@@ -687,14 +690,16 @@ body {
 .contact-collage {
     display: grid;
     gap: 0;
-    overflow: hidden;
+    justify-self: end;
+    overflow: visible;
     height: 100%;
-    place-items: center;
+    place-items: center end;
 }
 
 .contact-collage img {
-    width: 100%;
+    width: auto;
     height: 100%;
+    max-width: min(54vw, 56rem);
     display: block;
     object-fit: contain;
     min-height: 0;
@@ -707,6 +712,12 @@ body {
 #contact.panel {
     padding-top: 0;
     padding-bottom: 0;
+}
+
+@media (min-width: 961px) {
+    #contact.panel {
+        padding: 0;
+    }
 }
 
 @media (min-width: 1400px) and (min-height: 760px) {
@@ -759,7 +770,9 @@ body {
     }
 
     .contact-shell {
-        grid-template-columns: minmax(20rem, 1fr) auto;
+        grid-template-columns: minmax(18rem, 1fr) auto;
+        gap: clamp(2rem, 4vw, 5rem);
+        width: 100%;
     }
 
     .contact-shell,
@@ -767,15 +780,11 @@ body {
         height: 100%;
     }
 
-    .contact-collage {
-        overflow: visible;
-    }
-
     .contact-collage img {
         width: auto;
         height: 100%;
         max-height: 100%;
-        max-width: min(44vw, 38rem);
+        max-width: min(54vw, 56rem);
         object-fit: contain;
     }
 }
