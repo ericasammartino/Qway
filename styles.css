@@ -425,9 +425,8 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
-    gap: clamp(1.5rem, 4vh, 3rem);
 }
 
 .tour-shell-title {
@@ -442,7 +441,7 @@ body {
     align-items: stretch;
     gap: 0.7rem;
     width: 100%;
-    margin-bottom: 0;
+    margin-bottom: 1.8rem;
 }
 
 .tour-row {
@@ -459,7 +458,7 @@ body {
 }
 
 .tour-venue {
-    font-size: clamp(1.55rem, 2.2vw, 3rem);
+    font-size: clamp(1rem, 2.2vw, 3rem);
 }
 
 .tour-venue-name,
@@ -729,16 +728,18 @@ body {
     }
 }
 
-@media (min-width: 1400px) and (min-height: 760px) {
+@media (min-width: 1600px) and (min-height: 1080px) {
     body {
         display: grid;
         place-items: center;
         background: #eaf1f8;
+        background-image: url(./joe-woods-4Zaq5xY5M_c-unsplash.jpg);
+        background-size: cover;
     }
 
     .app {
-        width: min(calc(100vw - 4rem), 1480px);
-        height: min(calc(100dvh - 4rem), 900px);
+        width: min(calc(100vw - 4rem), 1600px);
+        height: min(calc(100dvh - 4rem), 1024px);
         box-shadow: 0 0 0 1px rgba(29, 29, 29, 0.08);
     }
 
@@ -755,39 +756,9 @@ body {
         width: min(920px, 90%);
     }
 
-    .btn {
-        padding: 0 1.35rem;
-    }
-
-    .btn.compact {
-        padding: 0 1.5rem;
-    }
-
-    .btn.tiny {
-        padding: 0 0.9rem;
-    }
-
-    .tour-shell {
-        max-width: 860px;
-        gap: clamp(2rem, 4vh, 3rem);
-    }
-
-    .tour-list {
-        gap: 0.8rem;
-    }
-
-    .tour-row {
-        height: 8rem;
-        min-height: 4.75rem;
-        grid-template-columns: 5rem minmax(0, 1fr) 9.5rem;
-    }
-
-    .tour-row .btn.tiny {
-        width: 9.5rem;
-    }
-
-    .subscribe-btn {
-        margin-top: 0;
+    .contact-shell,
+    .contact-collage {
+        height: 100%;
     }
 
     .contact-shell {
@@ -801,16 +772,33 @@ body {
         width: min(21rem, 100%);
     }
 
-    .contact-shell,
-    .contact-collage {
-        height: 100%;
-    }
-
     .contact-collage img {
         width: 100%;
         height: 100%;
         max-height: 100%;
         object-fit: contain;
+    }
+
+    .btn {
+        padding: 0 1.35rem;
+    }
+
+    .btn.compact {
+        padding: 0 1.5rem;
+    }
+
+    .btn.tiny {
+        padding: 0 0.9rem;
+    }
+
+    .tour-row {
+        height: 7rem;
+        min-height: 6rem;
+        grid-template-columns: 5rem minmax(0, 1fr) 9.5rem;
+    }
+
+    .tour-row .btn.tiny {
+        width: 9.5rem;
     }
 }
 
