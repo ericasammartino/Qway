@@ -354,7 +354,7 @@ body {
     justify-self: center;
     text-align: center;
     margin: 0;
-    font-size: clamp(4.2rem, 6vw, 7.4rem);
+    font-size: clamp(4.2rem, 6vw, 7rem);
     line-height: 0.95;
     font-style: italic;
     font-weight: 400;
