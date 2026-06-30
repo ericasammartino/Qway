@@ -33,6 +33,8 @@
     let touchStartX = 0;
     let touchStartY = 0;
     let cleanupTimerId = null;
+    let mobileScrollFrameId = null;
+    let mobilePanelChangeTimerId = null;
     let mobileScrollUnlockTimerId = null;
     let lastWindowScrollY = window.scrollY || 0;
 
@@ -86,11 +88,7 @@
         mobileRailTabs.forEach((tab) => {
             const index = panelIndexById[tab.dataset.target];
             if (index === undefined) return;
-
-            tab.addEventListener("click", () => {
-                setActive(index);
-                scrollPanelIntoView(index);
-            });
+            tab.setAttribute("aria-controls", sections[index].id);
         });
     }
 
@@ -321,6 +319,7 @@
     function handleResize() {
         updateA11y();
         updateMobilePanelStyles();
+        handleMobileRailScroll();
     }
 
     function updateMobilePanelStyles() {
@@ -435,7 +434,89 @@
         // the HOME bar, or hash links.
     }
 
+    function handleMobileRailScroll() {
+        if (isDesktop() || scrollLocked) return;
+
+        const currentScrollY = window.scrollY || 0;
+        const scrollDelta = currentScrollY - lastWindowScrollY;
+        lastWindowScrollY = currentScrollY;
+
+        if (Math.abs(scrollDelta) < 1) return;
+
+        const direction = scrollDelta > 0 ? 1 : -1;
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        const candidateIndex = getMobileScrollCandidate(direction, viewportHeight);
+
+        if (candidateIndex === null || candidateIndex === activeIndex) return;
+
+        activatePanelFromScroll(candidateIndex);
+    }
+
+    function getMobileScrollCandidate(direction, viewportHeight) {
+        if (direction < 0 && window.scrollY <= 8) {
+            return 0;
+        }
+
+        const candidates = [];
+
+        mobileRailTabs.forEach((tab) => {
+            const index = panelIndexById[tab.dataset.target];
+            if (index === undefined) return;
+
+            const rect = tab.getBoundingClientRect();
+            const isVisible = rect.bottom >= 0 && rect.top <= viewportHeight;
+            if (!isVisible) return;
+
+            if (direction > 0 && index > activeIndex && rect.top <= viewportHeight * 0.72) {
+                candidates.push({ index, distance: Math.abs(rect.top - viewportHeight * 0.35) });
+            }
+
+            if (direction < 0 && index < activeIndex && rect.bottom >= viewportHeight * 0.28) {
+                candidates.push({ index, distance: Math.abs(rect.bottom - viewportHeight * 0.65) });
+            }
+        });
+
+        if (!candidates.length) return null;
+
+        candidates.sort((a, b) => a.distance - b.distance);
+        return candidates[0].index;
+    }
+
+    function activatePanelFromScroll(index) {
+        if (mobilePanelChangeTimerId) return;
+
+        mobilePanelChangeTimerId = window.setTimeout(() => {
+            mobilePanelChangeTimerId = null;
+            setActive(index);
+            lastWindowScrollY = window.scrollY || 0;
+
+            window.setTimeout(() => {
+                lastWindowScrollY = window.scrollY || 0;
+            }, 120);
+        }, prefersReducedMotion() ? 0 : 120);
+    }
+
+    function handleScroll() {
+        if (mobileScrollFrameId) return;
+
+        mobileScrollFrameId = window.requestAnimationFrame(() => {
+            mobileScrollFrameId = null;
+            handleMobileRailScroll();
+        });
+    }
+
     document.addEventListener("click", (event) => {
+        const mobileRail = event.target.closest(".mobile-panel-rail");
+        if (mobileRail) {
+            const index = panelIndexById[mobileRail.dataset.target];
+            if (index === undefined) return;
+
+            event.preventDefault();
+            setActive(index);
+            scrollPanelIntoView(index);
+            return;
+        }
+
         const link = event.target.closest('a[href^="#"]');
         if (!link) return;
         const hash = decodeURIComponent(link.getAttribute("href").slice(1)).trim();
@@ -452,6 +533,7 @@
     window.addEventListener("touchstart", handleTouchStart, { passive: true });
     window.addEventListener("touchend", handleTouchEnd, { passive: true });
     window.addEventListener("wheel", handleWheel, { passive: false });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     if (viewport) {
         viewport.addEventListener("wheel", handleWheel, { passive: false });
     }
