@@ -653,7 +653,8 @@ body {
 .merch-shop-btn {
     display: flex;
     margin: 3rem auto 0;
-    width: min(210px, 100%);
+    width: min(18rem, 100%);
+    white-space: nowrap;
 }
 
 .contact-shell {
