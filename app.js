@@ -467,12 +467,17 @@
             const isVisible = rect.bottom >= 0 && rect.top <= viewportHeight;
             if (!isVisible) return;
 
-            if (direction > 0 && index > activeIndex && rect.top <= viewportHeight * 0.72) {
+            if (direction > 0 && index > activeIndex && rect.top <= viewportHeight * 0.68) {
                 candidates.push({ index, distance: Math.abs(rect.top - viewportHeight * 0.35) });
             }
 
-            if (direction < 0 && index < activeIndex && rect.bottom >= viewportHeight * 0.28) {
-                candidates.push({ index, distance: Math.abs(rect.bottom - viewportHeight * 0.65) });
+            if (
+                direction < 0 &&
+                index < activeIndex &&
+                rect.bottom >= 0 &&
+                rect.top <= viewportHeight * 0.32
+            ) {
+                candidates.push({ index, distance: Math.abs(rect.top - viewportHeight * 0.18) });
             }
         });
 
@@ -485,15 +490,17 @@
     function activatePanelFromScroll(index) {
         if (mobilePanelChangeTimerId) return;
 
+        scrollLocked = true;
         mobilePanelChangeTimerId = window.setTimeout(() => {
             mobilePanelChangeTimerId = null;
             setActive(index);
             lastWindowScrollY = window.scrollY || 0;
 
             window.setTimeout(() => {
+                scrollLocked = false;
                 lastWindowScrollY = window.scrollY || 0;
-            }, 120);
-        }, prefersReducedMotion() ? 0 : 120);
+            }, prefersReducedMotion() ? 80 : 520);
+        }, prefersReducedMotion() ? 0 : 260);
     }
 
     function handleScroll() {
