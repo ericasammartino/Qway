@@ -722,7 +722,7 @@ body {
     }
 
     .contact-shell {
-        padding-left: clamp(3rem, 7vw, 8rem);
+        padding-left: clamp(3rem, 7vw, 5rem);
     }
 
     .contact-collage {
