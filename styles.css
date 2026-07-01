@@ -410,7 +410,7 @@ body {
 .section-title {
     margin: 0;
     font-size: clamp(2.5rem, 5vw, 5.2rem);
-    line-height: 1;
+    line-height: 1.25;
 }
 
 .section-kicker {
