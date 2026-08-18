@@ -1078,9 +1078,7 @@ body {
 
     .panel-shell,
     .panel-shell>* {
-        transform: none !important;
         filter: none !important;
-        transition: none !important;
         animation: none !important;
     }
 
@@ -1088,6 +1086,10 @@ body {
         align-self: center;
         max-height: 0;
         opacity: 0 !important;
+        transform: translateY(1.25rem);
+        transition:
+            opacity 360ms ease,
+            transform 360ms ease;
         overflow: hidden;
         pointer-events: none;
     }
@@ -1095,6 +1097,7 @@ body {
     .panel.is-active .panel-shell {
         max-height: none;
         opacity: 1 !important;
+        transform: translateY(0);
         overflow: visible;
         pointer-events: auto;
         padding: 2.6rem 1.6rem;
@@ -1175,8 +1178,13 @@ body {
 
     .app,
     .panel,
+    .panel-shell,
     .merch-card {
         transition: none;
+    }
+
+    .panel-shell {
+        transform: none;
     }
 
     .merch-link:hover .merch-card,
