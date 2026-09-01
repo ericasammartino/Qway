@@ -335,15 +335,14 @@ body {
 
 .release-shell {
     display: grid;
-    grid-template-columns: minmax(260px, 0.86fr) minmax(320px, 1fr);
+    grid-template-columns: minmax(260px, 0.88fr) minmax(340px, 1fr);
     grid-template-areas:
-        "kicker cover"
         "title  cover"
         "meta   notes";
-    column-gap: clamp(3rem, 7vw, 7.25rem);
-    row-gap: clamp(1.1rem, 2vw, 1.7rem);
-    width: min(100%, 980px);
-    align-items: start;
+    column-gap: clamp(3.25rem, 7.5vw, 7.75rem);
+    row-gap: clamp(1.25rem, 2.2vw, 1.9rem);
+    width: min(100%, 960px);
+    align-items: center;
 }
 
 .release-left,
@@ -357,7 +356,7 @@ body {
     justify-self: center;
     text-align: center;
     margin: 0;
-    font-size: clamp(4.7rem, 7vw, 8.6rem);
+    font-size: clamp(5.25rem, 7.4vw, 8.9rem);
     line-height: 0.95;
     font-style: italic;
     font-weight: 400;
@@ -365,22 +364,13 @@ body {
 }
 
 .release-kicker {
-    grid-area: kicker;
-    align-self: start;
-    justify-self: center;
-    margin: 0 0 clamp(0.6rem, 1.4vh, 1rem);
-    color: var(--accent);
-    font-size: clamp(0.85rem, 0.9vw, 1.05rem);
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    line-height: 1;
-    text-transform: uppercase;
+    display: none;
 }
 
 .release-date {
-    margin: 0 0 0.55rem;
+    margin: 0;
     color: #3f3f3f;
-    font-size: clamp(1.2rem, 1.35vw, 1.8rem);
+    font-size: clamp(1.15rem, 1.25vw, 1.62rem);
     line-height: 1.2;
 }
 
@@ -388,20 +378,21 @@ body {
     grid-area: cover;
     align-self: end;
     margin: 0;
-    width: min(380px, 100%);
+    width: min(392px, 100%);
     height: auto;
     display: block;
     border-radius: 8px;
-    border: 1px solid rgba(29, 29, 29, 0.08);
-    box-shadow: 0 22px 48px rgba(29, 29, 29, 0.14);
+    border: 1px solid rgba(29, 29, 29, 0.09);
+    box-shadow: 0 18px 42px rgba(29, 29, 29, 0.12);
 }
 
 .release-copy {
     margin: 0;
-    max-width: 27rem;
-    font-size: clamp(1.04rem, 1.08vw, 1.35rem);
-    line-height: 1.62;
+    max-width: 28rem;
+    font-size: clamp(1rem, 1.03vw, 1.28rem);
+    line-height: 1.58;
     color: #3f3f3f;
+    text-wrap: pretty;
 }
 
 .release-copy strong {
@@ -415,12 +406,12 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1.15rem;
+    gap: 1.35rem;
 }
 
 .release-notes-wrap {
     grid-area: notes;
-    padding-top: 0.15rem;
+    padding-top: 0;
 }
 
 .text-link {
