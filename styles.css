@@ -335,12 +335,15 @@ body {
 
 .release-shell {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(260px, 0.86fr) minmax(320px, 1fr);
     grid-template-areas:
-        "title cover"
-        "meta  notes";
-    column-gap: clamp(2rem, 5vw, 6rem);
-    row-gap: 1rem;
+        "kicker cover"
+        "title  cover"
+        "meta   notes";
+    column-gap: clamp(3rem, 7vw, 7.25rem);
+    row-gap: clamp(1.1rem, 2vw, 1.7rem);
+    width: min(100%, 980px);
+    align-items: start;
 }
 
 .release-left,
@@ -354,34 +357,56 @@ body {
     justify-self: center;
     text-align: center;
     margin: 0;
-    font-size: clamp(4.2rem, 6vw, 7rem);
+    font-size: clamp(4.7rem, 7vw, 8.6rem);
     line-height: 0.95;
     font-style: italic;
     font-weight: 400;
+    letter-spacing: -0.04em;
+}
+
+.release-kicker {
+    grid-area: kicker;
+    align-self: start;
+    justify-self: center;
+    margin: 0 0 clamp(0.6rem, 1.4vh, 1rem);
+    color: var(--accent);
+    font-size: clamp(0.85rem, 0.9vw, 1.05rem);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    line-height: 1;
+    text-transform: uppercase;
 }
 
 .release-date {
-    margin: 0 0 1.5rem;
-    font-size: clamp(1.2rem, 1.4vw, 2rem);
+    margin: 0 0 0.55rem;
+    color: #3f3f3f;
+    font-size: clamp(1.2rem, 1.35vw, 1.8rem);
+    line-height: 1.2;
 }
 
 .release-cover {
     grid-area: cover;
     align-self: end;
     margin: 0;
-    width: min(340px, 100%);
+    width: min(380px, 100%);
     height: auto;
     display: block;
-    border-radius: 6px;
-    border: 1px solid rgba(29, 29, 29, 0.15);
+    border-radius: 8px;
+    border: 1px solid rgba(29, 29, 29, 0.08);
+    box-shadow: 0 22px 48px rgba(29, 29, 29, 0.14);
 }
 
 .release-copy {
     margin: 0;
-    max-width: 420px;
-    font-size: clamp(1rem, 1.1vw, 1.6rem);
-    line-height: 1.55;
+    max-width: 27rem;
+    font-size: clamp(1.04rem, 1.08vw, 1.35rem);
+    line-height: 1.62;
     color: #3f3f3f;
+}
+
+.release-copy strong {
+    color: var(--text);
+    font-weight: 700;
 }
 
 .release-meta {
@@ -390,11 +415,12 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    gap: 1rem;
+    gap: 1.15rem;
 }
 
 .release-notes-wrap {
     grid-area: notes;
+    padding-top: 0.15rem;
 }
 
 .text-link {
@@ -1110,6 +1136,7 @@ body {
     .release-shell {
         grid-template-columns: 1fr;
         grid-template-areas:
+            "kicker"
             "title"
             "meta"
             "cover"
