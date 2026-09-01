@@ -363,10 +363,6 @@ body {
     letter-spacing: -0.04em;
 }
 
-.release-kicker {
-    display: none;
-}
-
 .release-date {
     margin: 0;
     color: #3f3f3f;
@@ -1127,7 +1123,6 @@ body {
     .release-shell {
         grid-template-columns: 1fr;
         grid-template-areas:
-            "kicker"
             "title"
             "meta"
             "cover"
