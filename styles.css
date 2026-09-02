@@ -168,6 +168,20 @@ body {
     display: none;
 }
 
+.menu-content-wrapper,
+.menu-content {
+    display: contents;
+}
+
+.arrow-icon {
+    display: none;
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+    flex: 0 0 auto;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
 .social-rail {
     width: var(--social-rail-width);
     flex: 0 0 var(--social-rail-width);
@@ -935,8 +949,13 @@ body {
         overflow: visible;
     }
 
+    .stacked-menu {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
     .panel-track {
-        display: block;
         transform: none !important;
         overflow-anchor: none;
     }
@@ -958,31 +977,11 @@ body {
     }
 
     .panel.is-active {
-        padding-bottom: 1.6rem;
-    }
-
-    .panel.is-active .mobile-panel-rail {
-        position: static;
-        z-index: auto;
-        display: flex;
-        margin-bottom: 1.6rem;
+        padding-bottom: 0;
     }
 
     .app:not([data-active-section="home"]) .mobile-home-return {
-        position: static;
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 52px;
-        padding: 0 1.6rem;
-        background: var(--bg);
-        border: 0;
-        border-bottom: 1px solid var(--rail);
-        color: var(--muted);
-        font: inherit;
-        font-size: clamp(1rem, 4vw, 1.25rem);
-        cursor: pointer;
+        display: none;
     }
 
     #home.panel {
@@ -1089,35 +1088,85 @@ body {
         text-align: center;
     }
 
-    .panel-shell,
-    .panel-shell>* {
+    .mobile-panel-rail.menu-trigger {
+        position: static;
+        z-index: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        min-width: 0;
+        height: 56px;
+        flex: 0 0 56px;
+        writing-mode: horizontal-tb;
+        transform: none;
+        border: 0;
+        border-bottom: 1px solid var(--rail);
+        background: rgba(255, 255, 255, 0.34);
+        color: var(--muted);
+        margin: 0;
+        padding: 0 1.35rem;
+        font-size: clamp(1rem, 4vw, 1.25rem);
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .mobile-panel-rail.menu-trigger::after {
+        display: none;
+    }
+
+    .mobile-panel-rail.menu-trigger:hover,
+    .mobile-panel-rail.menu-trigger:focus-visible {
+        color: var(--text);
+    }
+
+    .arrow-icon {
+        display: block;
+    }
+
+    .menu-item.is-open .arrow-icon {
+        transform: rotate(180deg);
+    }
+
+    .mobile-panel-content-wrapper {
+        display: grid;
+        grid-template-rows: 0fr;
+        width: 100%;
+        transition: grid-template-rows 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .mobile-panel-content {
+        display: block;
+        min-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transform: translateY(-8px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .menu-item.is-open .mobile-panel-content-wrapper {
+        grid-template-rows: 1fr;
+    }
+
+    .menu-item.is-open .mobile-panel-content {
+        opacity: 1;
+        transform: translateY(0);
+        transition-delay: 0.05s;
+    }
+
+    .mobile-panel-content .panel-shell,
+    .mobile-panel-content .panel-shell>* {
         filter: none !important;
         animation: none !important;
     }
 
-    .panel-shell {
+    .mobile-panel-content .panel-shell {
         align-self: center;
-        max-height: 0;
-        opacity: 0 !important;
-        transform: translateY(1.25rem);
-        transition:
-            opacity 360ms ease,
-            transform 360ms ease;
-        overflow: hidden;
-        pointer-events: none;
-    }
-
-    .panel.is-active .panel-shell {
-        max-height: none;
         opacity: 1 !important;
-        transform: translateY(0);
+        transform: none;
         overflow: visible;
         pointer-events: auto;
         padding: 2.6rem 1.6rem;
-    }
-
-    .panel.is-active .panel-shell>* {
-        opacity: 1 !important;
     }
 
     .release-shell {
@@ -1192,6 +1241,9 @@ body {
     .app,
     .panel,
     .panel-shell,
+    .mobile-panel-content-wrapper,
+    .mobile-panel-content,
+    .arrow-icon,
     .merch-card {
         transition: none;
     }

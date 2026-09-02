@@ -86,7 +86,14 @@
         mobileRailTabs.forEach((tab) => {
             const index = panelIndexById[tab.dataset.target];
             if (index === undefined) return;
-            tab.setAttribute("aria-controls", sections[index].id);
+            const contentWrapper = panels[index].querySelector(".mobile-panel-content-wrapper");
+            if (contentWrapper && !contentWrapper.id) {
+                contentWrapper.id = `${sections[index].id}-mobile-content`;
+            }
+            if (contentWrapper) {
+                tab.setAttribute("aria-controls", contentWrapper.id);
+            }
+            tab.setAttribute("aria-expanded", "false");
         });
     }
 
@@ -283,12 +290,20 @@
 
         panels.forEach((panel, index) => {
             if (!panel) return;
-            panel.classList.toggle("is-active", index === activeIndex);
+            const isActive = index === activeIndex;
+            const mobileTrigger = panel.querySelector(".mobile-panel-rail");
+
+            panel.classList.toggle("is-active", isActive);
+            panel.classList.toggle("is-open", isActive);
             panel.classList.toggle("parked-left", desktop && index < activeIndex);
             panel.classList.toggle(
                 "was-active",
                 index === previousIndex && previousIndex !== activeIndex
             );
+
+            if (mobileTrigger) {
+                mobileTrigger.setAttribute("aria-expanded", String(isActive));
+            }
         });
 
         if (desktop && moved) {
@@ -438,6 +453,10 @@
             if (index === undefined) return;
 
             event.preventDefault();
+            if (!isDesktop() && index === activeIndex) {
+                setActive(0);
+                return;
+            }
             setActive(index);
             scrollPanelIntoView(index);
             return;
