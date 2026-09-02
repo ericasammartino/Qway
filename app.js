@@ -17,6 +17,7 @@
     const viewport = document.getElementById("viewport");
     const mobileHomeReturn = document.getElementById("mobileHomeReturn");
     const mobileSectionLabel = document.getElementById("mobileSectionLabel");
+    const logo = document.querySelector(".logo");
     const panels = sections.map((section) => document.getElementById(section.id));
     const root = document.documentElement;
     const RAIL_TAB_WIDTH = 52;
@@ -39,6 +40,14 @@
     const isDesktop = () => window.matchMedia("(min-width: 961px)").matches;
     const prefersReducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const mobileRailTabs = Array.from(document.querySelectorAll(".mobile-panel-rail"));
+
+    if (logo && !logo.complete) {
+        logo.addEventListener("error", () => {
+            logo.classList.add("is-missing");
+        });
+    } else if (logo && logo.naturalWidth === 0) {
+        logo.classList.add("is-missing");
+    }
 
     function createTab(section, index, isActive) {
         const tab = document.createElement("button");

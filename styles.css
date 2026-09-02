@@ -278,6 +278,23 @@ body {
     margin-bottom: 2.2rem;
 }
 
+.logo-fallback {
+    display: none;
+    margin: 0 0 2.2rem;
+    font-size: clamp(5rem, 14vw, 9rem);
+    font-style: italic;
+    line-height: 0.95;
+    letter-spacing: -0.06em;
+}
+
+.logo.is-missing {
+    display: none;
+}
+
+.logo.is-missing + .logo-fallback {
+    display: block;
+}
+
 .cta-row {
     display: flex;
     flex-wrap: wrap;
