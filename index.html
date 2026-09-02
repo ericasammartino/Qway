@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Qway</title>
+    <link rel="icon" type="image/x-icon" href="./Diamond.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+</head>
+
+<body>
+    <div class="app" data-active-section="home">
+        <aside class="rail rail-left">
+            <nav id="leftRailNav" class="rail-nav" aria-label="Opened" aria-hidden="true" sections></nav>
+        </aside>
+
+        <main class="viewport" id="viewport">
+            <div class="panel-track stacked-menu" id="panelTrack">
+                <section class="panel is-active" id="home">
+                    <div class="panel-shell hero-shell">
+                        <img class="logo" src="QWAY_LOGO.png" alt="Qway logo" />
+                        <p class="logo-fallback" aria-hidden="true">Qway</p>
+                        <div class="cta-row">
+                            <a href="#watch" class="btn btn-primary">Watch now</a>
+                            <a href="#merch" class="btn btn-outline">Shop</a>
+                        </div>
+                        <p class="tagline">Eastern Progressive Psych Trio from Philly</p>
+                    </div>
+                </section>
+
+                <button type="button" id="mobileHomeReturn" class="mobile-home-return" data-target="home"
+                    aria-label="Return to home">
+                    <span class="mobile-home-return-label">HOME</span>
+                    <span class="mobile-section-label" id="mobileSectionLabel" aria-hidden="true"></span>
+                </button>
+
+                <section class="panel menu-item" id="new-release" aria-hidden="true" inert>
+                    <button type="button" class="mobile-panel-rail rail-tab menu-trigger" data-target="new-release">
+                        <span>NEW RELEASE</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <div class="menu-content-wrapper mobile-panel-content-wrapper">
+                        <div class="menu-content mobile-panel-content">
+                            <div class="panel-shell release-shell">
+                                <div class="release-left">
+                                    <h1 class="release-title">Rouge</h1>
+                                    <div class="release-meta">
+                                        <p class="release-date">Album out September 25, 2026</p>
+                                        <a href="https://music.qwayband.com/rouge" class="btn btn-primary compact">Listen
+                                            now</a>
+                                    </div>
+                                </div>
+
+                                <div class="release-right">
+                                    <img class="release-cover" src="./rouge-cover.png" alt="Rouge album cover" />
+                                    <div class="release-notes-wrap">
+                                        <p class="release-copy"><strong>About:</strong> What started as a few ideas for songs
+                                            that we collectively loved and wanted to cover, turned into a full endeavor to
+                                            rework each song in a way that felt unique to us and added something to the song's
+                                            story. Red Clay and Red are both incredible pieces by Freddie Hubbard and King
+                                            Crimson, respectively, and we hope listeners enjoy our takes on these favorites of
+                                            ours. Both red in sound and in name; therefore, we call this EP "Rouge."</p>
+                                        <!-- <a class="text-link" href="#">Read Album Notes</a> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel menu-item" id="tour" aria-hidden="true" inert>
+                    <button type="button" class="mobile-panel-rail rail-tab menu-trigger" data-target="tour">
+                        <span>TOUR</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <div class="menu-content-wrapper mobile-panel-content-wrapper">
+                        <div class="menu-content mobile-panel-content">
+                            <div class="panel-shell tour-shell">
+                                <div class="tour-shell-title">
+                                    <h2 class="section-title">Summer Tour 2026</h2>
+                                    <!-- <p class="section-kicker">5 dates &bull; Northeast US</p> -->
+                                </div>
+                                <div class="tour-list" role="list">
+                                    <div class="tour-row" role="listitem">
+                                        <span class="tour-date">07.10</span>
+                                        <span class="tour-venue">
+                                            <span class="tour-venue-name">Design 710 Dispensary</span>
+                                            <span class="tour-venue-city">Atlantic City, NJ</span>
+                                        </span>
+                                        <a class="btn btn-outline tiny" href="https://design710.com/">Venue Info</a>
+                                    </div>
+                                    <div class="tour-row" role="listitem">
+                                        <span class="tour-date">07.25</span>
+                                        <span class="tour-venue">
+                                            <span class="tour-venue-name">Ripple Rays</span>
+                                            <span class="tour-venue-city">Richmond, VA</span>
+                                        </span>
+                                        <a class="btn btn-outline tiny"
+                                            href="https://www.instagram.com/rippleraysrva?fbclid=IwY2xjawSorP9leHRuA2FlbQIxMABicmlkETFXMUkwOHJpdUxjenV4REVuc3J0YwZhcHBfaWQQMjIyMDM5MTc4ODIwMDg5MgABHiZfAPDRy7J1Fv8LA4t99ERIMXY3-Tamw7LrhTrI_75NSgABYyYIpuGS6tIx_aem_Ow8U67XPHu4QHPWU5sk6EA">Venue
+                                            Info</a>
+                                    </div>
+                                    <div class="tour-row" role="listitem">
+                                        <span class="tour-date">08.29</span>
+                                        <span class="tour-venue">
+                                            <span class="tour-venue-name">Camp Scampi</span>
+                                            <span class="tour-venue-city">Addison, NY</span>
+                                        </span>
+                                        <a class="btn btn-outline tiny" href="http://theticketing.co/e/campscampi">Tickets</a>
+                                    </div>
+                            <!-- <div class="tour-row" role="listitem">
+                                <span class="tour-date">02.27</span>
+                                <span class="tour-venue">
+                                    <span class="tour-venue-name">Ophelia&rsquo;s</span>
+                                    <span class="tour-venue-city">Albany, NY</span>
+                                </span>
+                                <a class="btn btn-outline tiny" href="#">Tickets</a>
+                            </div> -->
+                            <!-- <div class="tour-row" role="listitem">
+                                <span class="tour-date">02.28</span>
+                                <span class="tour-venue">
+                                    <span class="tour-venue-name">Bar Freida</span>
+                                    <span class="tour-venue-city">Queens, NY</span>
+                                </span>
+                                <a class="btn btn-outline tiny" href="#">Tickets</a>
+                            </div> -->
+                                </div>
+                                <a class="btn btn-primary compact subscribe-btn" href="#contact">Subscribe for updates</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel menu-item" id="watch" aria-hidden="true" inert>
+                    <button type="button" class="mobile-panel-rail rail-tab menu-trigger" data-target="watch">
+                        <span>WATCH</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <div class="menu-content-wrapper mobile-panel-content-wrapper">
+                        <div class="menu-content mobile-panel-content">
+                            <div class="panel-shell watch-shell">
+                                <h2 class="section-title">Crash Landing</h2>
+                                <p class="watch-subtitle">Official Video</p>
+                                <div class="video-card video-embed">
+                                    <a href="https://www.youtube.com/watch?v=IAd2jDeMKb0">
+                                        <video class="watch-video watch-video-desktop"
+                                            src="./walk%20%26%20rock%20NO%20text%20horizontal.mov"
+                                            title="Crash Landing official video" autoplay muted loop playsinline preload="auto">
+                                        </video>
+                                        <video class="watch-video watch-video-mobile"
+                                            src="./Walk n rock no text verticle.mov" title="Crash Landing official video"
+                                            autoplay muted loop playsinline preload="auto">
+                                        </video>
+                                    </a>
+                                </div>
+                                <div class="cta-row">
+                                    <a class="btn btn-primary compact" href="https://www.youtube.com/watch?v=IAd2jDeMKb0">Watch
+                                        official video</a>
+                                    <a class="btn btn-outline compact" href="https://www.youtube.com/@qway235">See all
+                                        videos</a>
+                                </div>
+                                <p class="platform-row">
+                                    Also available on
+                                    <a href="https://www.youtube.com/@qway235">YouTube</a>
+                                    <img src="./Tear-Drop.png">
+                                    <a href="https://open.spotify.com/artist/5vlnyrWf2SEe51IdwyKnfS">Spotify</a>
+                                    <img src="./Tear-Drop.png">
+                                    <a href="https://qwayband.bandcamp.com/">Bandcamp</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel menu-item" id="listen" aria-hidden="true" inert>
+                    <button type="button" class="mobile-panel-rail rail-tab menu-trigger" data-target="listen">
+                        <span>LISTEN</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <div class="menu-content-wrapper mobile-panel-content-wrapper">
+                        <div class="menu-content mobile-panel-content">
+                            <div class="panel-shell listen-shell">
+                                <p class="discography-label">DISCOGRAPHY</p>
+                                <div class="release-grid-shell">
+                                    <div class="release-grid">
+                                        <article class="release-card">
+                                            <img src="FrontCover_CrashLanding_Remix_3.png"
+                                                alt="Crash Landing / Assimilate Remix cover" />
+                                            <h3>
+                                                <a class="release-play"
+                                                    href="https://open.spotify.com/album/3hrsbWNF5oDpgrcZdaZlt7"
+                                                    rel="noopener noreferrer"
+                                                    aria-label="Listen to Crash Landing / Assimilate Remix on Bandcamp">
+                                                    <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+                                                </a>
+                                                Crash Landing / Assimilate Remix
+                                            </h3>
+                                            <p>2026</p>
+                                        </article>
+                                        <article class="release-card">
+                                            <img src="solidus.jpg" alt="Solidus cover" />
+                                            <h3>
+                                                <a class="release-play" href="https://music.qwayband.com/solidus"
+                                                    rel="noopener noreferrer" aria-label="Listen to Solidus on Bandcamp">
+                                                    <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+                                                </a>
+                                                Solidus
+                                            </h3>
+                                            <p>2025</p>
+                                        </article>
+                                        <article class="release-card">
+                                            <img src="deathfromabove.jpg" alt="Death from Above cover" />
+                                            <h3>
+                                                <a class="release-play"
+                                                    href="https://open.spotify.com/album/1ns12uy5pKNgYbkU3yPJbM"
+                                                    rel="noopener noreferrer"
+                                                    aria-label="Listen to Death from Above on Bandcamp">
+                                                    <i class="fa-regular fa-circle-play" aria-hidden="true"></i>
+                                                </a>
+                                                Death from Above
+                                            </h3>
+                                            <p>2021</p>
+                                        </article>
+                                    </div>
+                                    <p class="platform-row">
+                                        Also available on
+                                        <a href="https://www.youtube.com/@qway235">YouTube</a>
+                                        <img src="./Tear-Drop.png">
+                                        <a href="https://open.spotify.com/artist/5vlnyrWf2SEe51IdwyKnfS">Spotify</a>
+                                        <img src="./Tear-Drop.png">
+                                        <a href="https://qwayband.bandcamp.com/">Bandcamp</a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel menu-item" id="merch" aria-hidden="true" inert>
+                    <button type="button" class="mobile-panel-rail rail-tab menu-trigger" data-target="merch">
+                        <span>MERCH</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <div class="menu-content-wrapper mobile-panel-content-wrapper">
+                        <div class="menu-content mobile-panel-content">
+                            <div class="panel-shell merch-shell">
+                                <p class="discography-label">SHOP</p>
+                                <div class="merch-grid">
+                                    <a class="merch-link" href="https://qwayband.bandcamp.com/album/solidus">
+                                        <article class="merch-card">
+                                            <img src="compact_disc.png" alt="Compact disc" />
+                                            <h3 class="merch-card-title">(solidus)</h3>
+                                            <h3>Compact Disc</h3>
+                                            <p>$10</p>
+                                        </article>
+                                    </a>
+                                    <a class="merch-link" href="https://qwayband.bandcamp.com/album/solidus">
+                                        <article class="merch-card">
+                                            <img src="vinyl.png" alt="Vinyl" />
+                                            <h3 class="merch-card-title">(solidus)</h3>
+                                            <h3>Limited Edition Vinyl</h3>
+                                            <p>$30</p>
+                                        </article>
+                                    </a>
+                                    <a class="merch-link" href="https://qwayband.bandcamp.com/album/solidus">
+                                        <article class="merch-card">
+                                            <img src="compact_disc.png" alt="Compact disc" />
+                                            <h3 class="merch-card-title">(solidus)</h3>
+                                            <h3>Compact Disc</h3>
+                                            <p>$10</p>
+                                        </article>
+                                    </a>
+                                    <a class="merch-link" href="https://qwayband.bandcamp.com/album/solidus">
+                                        <article class="merch-card">
+                                            <img src="vinyl.png" alt="Vinyl" />
+                                            <h3 class="merch-card-title">(solidus)</h3>
+                                            <h3>Limited Edition Vinyl</h3>
+                                            <p>$30</p>
+                                        </article>
+                                    </a>
+                                </div>
+                                <a href="#merch" class="btn btn-outline merch-shop-btn">See all merch</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="panel menu-item" id="contact" aria-hidden="true" inert>
+                    <button type="button" class="mobile-panel-rail rail-tab menu-trigger" data-target="contact">
+                        <span>CONTACT</span>
+                        <svg class="arrow-icon" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M7 10l5 5 5-5z" />
+                        </svg>
+                    </button>
+                    <div class="menu-content-wrapper mobile-panel-content-wrapper">
+                        <div class="menu-content mobile-panel-content">
+                            <div class="panel-shell contact-shell">
+                                <div class="contact-copy">
+                                    <p class="contact-heading">Join our mailing list</p>
+                                    <a href="#" class="btn btn-primary compact">Subscribe for updates</a>
+                                    <p class="contact-meta">Bookings + Media</p>
+                                    <a href="mailto:jared@sageentertainment.live"
+                                        class="contact-email">jared@sageentertainment.live</a><br>
+                                    <a href="mailto:qwayband@gmail.com" class="contact-email">qwayband@gmail.com</a>
+                                </div>
+
+                                <div class="contact-collage" aria-hidden="true">
+                                    <img src="./9031C6F4-C51A-4ED4-B66D-947D44CA0385-16717-000006DD216D6597.jpg" alt="" />
+                                </div>
+                            </div>
+                            <div class="contact-social-rail social-rail" aria-label="Social links">
+                                <a href="https://www.facebook.com/qwayband" aria-label="Facebook"><i
+                                        class="fa-brands fa-facebook-f"></i></a>
+                                <a href="https://open.spotify.com/artist/5vlnyrWf2SEe51IdwyKnfS" aria-label="Spotify"><i
+                                        class="fa-brands fa-spotify"></i></a>
+                                <a href="https://www.instagram.com/qwayband/" aria-label="Instagram"><i
+                                        class="fa-brands fa-instagram"></i></a>
+                                <a href="https://www.youtube.com/@qway235" aria-label="YouTube"><i
+                                        class="fa-brands fa-youtube"></i></a>
+                                <a href="https://qwayband.bandcamp.com/" aria-label="Bandcamp"><i
+                                        class="fa-brands fa-bandcamp"></i></a>
+                                <a href="mailto:qwayband@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+
+        <aside class="rail rail-right">
+            <nav id="rightRailNav" class="rail-nav" aria-label="More sections">
+                <button type="button" class="rail-tab" data-target="new-release">
+                    NEW RELEASE
+                </button>
+                <button type="button" class="rail-tab" data-target="tour">TOUR</button>
+                <button type="button" class="rail-tab" data-target="watch">WATCH</button>
+                <button type="button" class="rail-tab" data-target="listen">LISTEN</button>
+                <button type="button" class="rail-tab" data-target="merch">MERCH</button>
+                <button type="button" class="rail-tab" data-target="contact">CONTACT</button>
+            </nav>
+            <div class="social-rail" aria-label="Social links">
+                <a href="https://www.facebook.com/qwayband" aria-label="Facebook"><i
+                        class="fa-brands fa-facebook-f"></i></a>
+                <a href="https://open.spotify.com/artist/5vlnyrWf2SEe51IdwyKnfS" aria-label="Spotify"><i
+                        class="fa-brands fa-spotify"></i></a>
+                <a href="https://www.instagram.com/qwayband/" aria-label="Instagram"><i
+                        class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@qway235" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://qwayband.bandcamp.com/" aria-label="Bandcamp"><i class="fa-brands fa-bandcamp"></i></a>
+                <a href="mailto:qwayband@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </aside>
+    </div>
+</body>
+
+</html>
