@@ -774,17 +774,12 @@ body {
 
 @media (min-width: 1600px) and (min-height: 1080px) {
     body {
-        display: grid;
-        place-items: center;
-        background: #eaf1f8;
-        background-image: url(./joe-woods-4Zaq5xY5M_c-unsplash.jpg);
-        background-size: cover;
+        background: var(--bg);
     }
 
     .app {
-        width: min(calc(100vw - 4rem), 1600px);
-        height: min(calc(100dvh - 4rem), 1024px);
-        box-shadow: 0 0 0 1px rgba(29, 29, 29, 0.08);
+        width: 100%;
+        height: 100dvh;
     }
 
     .rail {
