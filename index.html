@@ -6,212 +6,166 @@
   <title>West End — Things to do on the Upper West Side</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,620;1,9..144,500;1,9..144,580&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="sheet">
-    <header class="mast">
-      <p class="issue">No. 38 <span>Sept 29 – Oct 5</span></p>
-      <div class="wordmark">
-        <p class="kicker">Things to do on the Upper West Side</p>
-        <p class="logo">West End</p>
-      </div>
+  <div class="page">
+    <header class="top">
+      <a class="brand" href="#top">
+        <span class="leaf" aria-hidden="true"></span>
+        West End
+      </a>
+      <nav class="pills" aria-label="Categories">
+        <a class="on" href="#market">Weekend</a>
+        <a href="#linden">Eat</a>
+        <a href="#jazz">Listen</a>
+        <a href="#parks">Parks</a>
+        <a href="#puppets">Kids</a>
+      </nav>
       <form class="search" role="search" action="#market">
         <label class="sr" for="q">Search things to do</label>
-        <input id="q" type="search" placeholder="Jazz, markets, puppets…" autocomplete="off">
-        <button type="submit">Search</button>
+        <input id="q" type="search" placeholder="Markets, jazz, parks…" autocomplete="off">
       </form>
     </header>
 
-    <nav class="cats" aria-label="Categories">
-      <a class="on" href="#market">This week</a>
-      <a href="#market">Markets</a>
-      <a href="#jazz">Music</a>
-      <a href="#linden">Eat</a>
-      <a href="#puppets">Kids</a>
-      <a href="#also">Outdoors</a>
-      <a href="#also">Stage</a>
-    </nav>
+    <section class="intro" id="top">
+      <p class="where-line">Upper West Side · Sept 29 – Oct 5</p>
+      <h1>Come outside.</h1>
+      <p class="lede">A relaxed list for the week: the greenmarket under the trees, a late jazz set, a new table on Amsterdam, and puppets in the park.</p>
+    </section>
 
-    <main>
-      <article class="hero" id="market">
-        <div class="hero-copy">
-          <p class="eyebrow"><span>Sunday</span> Columbus Avenue</p>
-          <h1>Apple season at the 79th Street Greenmarket.</h1>
-          <p class="deck">Farmers set up from the museum steps toward the park. Macouns, asters, and a cider press near 79th — bring a tote and get there before the good cheese is gone.</p>
-          <ul class="facts">
-            <li><span>When</span> Sunday, 8am–4pm</li>
-            <li><span>Where</span> Columbus, 77th to 81st</li>
-            <li><span>Cost</span> Free to wander</li>
-          </ul>
-          <a class="go" href="#market">See who’s at the market</a>
-        </div>
-        <figure class="scene">
-          <svg viewBox="0 0 640 560" role="img" aria-label="Illustration of brownstones and greenmarket tents along Columbus Avenue">
-            <rect width="640" height="560" fill="#efe2cf"/>
-            <rect y="430" width="640" height="130" fill="#e4d3b8"/>
-            <rect y="448" width="640" height="8" fill="#d7c4a6"/>
-            <circle cx="78" cy="250" r="62" fill="#234438"/>
-            <circle cx="128" cy="268" r="40" fill="#2f5648"/>
-            <rect x="72" y="286" width="10" height="150" fill="#3d2a22"/>
-            <g fill="#5c2e29">
-              <rect x="168" y="168" width="78" height="268"/>
-            </g>
-            <g fill="#7c3b32">
-              <rect x="254" y="132" width="92" height="304"/>
-            </g>
-            <g fill="#4a2623">
-              <rect x="354" y="186" width="74" height="250"/>
-            </g>
-            <g fill="#f6edd9">
-              <rect x="184" y="192" width="18" height="26"/>
-              <rect x="214" y="192" width="18" height="26"/>
-              <rect x="184" y="236" width="18" height="26"/>
-              <rect x="214" y="236" width="18" height="26"/>
-              <rect x="184" y="280" width="18" height="26"/>
-              <rect x="214" y="280" width="18" height="26"/>
-              <rect x="272" y="158" width="20" height="28"/>
-              <rect x="306" y="158" width="20" height="28"/>
-              <rect x="272" y="206" width="20" height="28"/>
-              <rect x="306" y="206" width="20" height="28"/>
-              <rect x="272" y="254" width="20" height="28"/>
-              <rect x="306" y="254" width="20" height="28"/>
-              <rect x="272" y="302" width="20" height="28"/>
-              <rect x="306" y="302" width="20" height="28"/>
-              <rect x="370" y="214" width="16" height="24"/>
-              <rect x="396" y="214" width="16" height="24"/>
-              <rect x="370" y="256" width="16" height="24"/>
-              <rect x="396" y="256" width="16" height="24"/>
-              <rect x="370" y="298" width="16" height="24"/>
-              <rect x="396" y="298" width="16" height="24"/>
-            </g>
-            <rect x="292" y="360" width="22" height="76" fill="#2a1c18"/>
-            <circle cx="560" cy="300" r="78" fill="#1e3d33"/>
-            <circle cx="500" cy="318" r="48" fill="#2b5144"/>
-            <rect x="552" y="340" width="12" height="100" fill="#3d2a22"/>
-            <path d="M36 470 L150 392 L264 470 Z" fill="#f7f1e6" stroke="#1c1712" stroke-width="3" stroke-linejoin="round"/>
-            <path d="M248 470 L362 392 L476 470 Z" fill="#f7f1e6" stroke="#1c1712" stroke-width="3" stroke-linejoin="round"/>
-            <path d="M48 470 h204" stroke="#234438" stroke-width="14"/>
-            <path d="M260 470 h204" stroke="#7c3b32" stroke-width="14"/>
-            <g fill="#8d332c">
-              <circle cx="92" cy="492" r="11"/>
-              <circle cx="116" cy="498" r="11"/>
-              <circle cx="108" cy="480" r="11"/>
-              <circle cx="136" cy="488" r="10"/>
-            </g>
-            <g fill="#c4552a">
-              <circle cx="330" cy="494" r="10"/>
-              <circle cx="352" cy="500" r="10"/>
-              <circle cx="344" cy="482" r="10"/>
-            </g>
-            <g fill="#d6a43a">
-              <rect x="176" y="478" width="46" height="28" rx="2"/>
-              <rect x="400" y="476" width="42" height="30" rx="2"/>
-            </g>
-            <g fill="#1c1712">
-              <circle cx="210" cy="456" r="7"/>
-              <rect x="204" y="464" width="12" height="28" rx="4"/>
-              <circle cx="430" cy="452" r="7"/>
-              <rect x="424" y="460" width="12" height="30" rx="4"/>
-            </g>
+    <article class="feature" id="market">
+      <div class="feature-copy">
+        <p class="tag">Sunday · outdoors</p>
+        <h2>Apple season at the greenmarket.</h2>
+        <p>Tents go up along Columbus, with the park at one end and the museum at the other. Macouns, asters, and a cider press near 79th.</p>
+        <p class="when">79th Street · 8am–4pm · Free to wander</p>
+      </div>
+      <figure class="art art-market">
+        <svg viewBox="0 0 640 460" role="img" aria-label="A sunny park lawn with market tents and trees">
+          <rect width="640" height="460" fill="#e5f3ea"/>
+          <ellipse cx="320" cy="430" rx="340" ry="70" fill="#b7d7b4"/>
+          <ellipse cx="150" cy="400" rx="120" ry="36" fill="#cfe6c4"/>
+          <circle cx="92" cy="250" r="78" fill="#2f7a4e"/>
+          <circle cx="150" cy="230" r="58" fill="#3d9460"/>
+          <rect x="86" y="300" width="12" height="90" rx="6" fill="#6b4a32"/>
+          <circle cx="520" cy="220" r="90" fill="#257248"/>
+          <circle cx="450" cy="250" r="62" fill="#348a58"/>
+          <rect x="514" y="280" width="14" height="110" rx="6" fill="#6b4a32"/>
+          <path d="M210 340 L300 268 L390 340 Z" fill="#fffdf8"/>
+          <path d="M360 348 L450 276 L540 348 Z" fill="#fffdf8"/>
+          <path d="M218 340 h164" stroke="#2f7a4e" stroke-width="10" stroke-linecap="round"/>
+          <path d="M368 348 h164" stroke="#e39a45" stroke-width="10" stroke-linecap="round"/>
+          <g fill="#d4533a">
+            <circle cx="250" cy="362" r="9"/>
+            <circle cx="270" cy="370" r="9"/>
+            <circle cx="262" cy="352" r="8"/>
+          </g>
+          <g fill="#e7b03a">
+            <circle cx="430" cy="368" r="8"/>
+            <circle cx="448" cy="374" r="8"/>
+            <circle cx="440" cy="358" r="8"/>
+          </g>
+          <path d="M40 400 C180 370 460 450 640 390" fill="none" stroke="#f4fbf6" stroke-width="18" stroke-linecap="round"/>
+        </svg>
+        <figcaption>79th Street Greenmarket</figcaption>
+      </figure>
+    </article>
+
+    <section class="outings" aria-label="Going out">
+      <article class="card" id="jazz">
+        <div class="card-art night">
+          <svg viewBox="0 0 360 180" aria-hidden="true">
+            <rect width="360" height="180" fill="#1f4d3c"/>
+            <circle cx="300" cy="42" r="18" fill="#f3e2b0"/>
+            <circle cx="40" cy="120" r="46" fill="#16382c"/>
+            <rect x="34" y="120" width="8" height="60" fill="#0e241c"/>
+            <rect x="150" y="48" width="92" height="132" rx="6" fill="#f7f1e4"/>
+            <rect x="166" y="66" width="60" height="42" rx="4" fill="#f0c36a"/>
+            <circle cx="196" cy="150" r="10" fill="#1f4d3c"/>
           </svg>
-          <figcaption>79th Street Greenmarket</figcaption>
-        </figure>
+        </div>
+        <div class="card-body">
+          <p class="tag">Tonight · listen</p>
+          <h2>Late set at Smoke.</h2>
+          <p>A small jazz room on Broadway. The Monday band plays like the block stopped in on purpose.</p>
+          <p class="when">Broadway &amp; 106th · Doors 6pm</p>
+        </div>
       </article>
 
-      <section class="picks" aria-label="Featured this week">
-        <article class="pick" id="jazz">
-          <p class="num">01 <span>Hear</span></p>
-          <h2>The late set at Smoke.</h2>
-          <p>A small room on Broadway where the Monday band still plays like the block is listening. Come for the horn section. Stay because nobody rushes the table.</p>
-          <p class="meta">Smoke Jazz &amp; Supper Club<br>Broadway &amp; 106th · Doors 6pm</p>
-        </article>
-        <article class="pick" id="linden">
-          <p class="num">02 <span>Eat</span></p>
-          <h2>Linden just opened on Amsterdam.</h2>
-          <p>A new corner room: wood-fired vegetables, a rye loaf you can smell from the crosswalk, and a short list of wines. First-week tables disappear after seven.</p>
-          <p class="meta">Linden<br>Amsterdam &amp; 84th · Dinner from 5</p>
-        </article>
-        <article class="pick" id="puppets">
-          <p class="num">03 <span>See</span></p>
-          <h2>Puppets in the park.</h2>
-          <p>The Swedish Cottage Marionette Theatre is running a short autumn show. Forty minutes, a wooden stage, and the front row whispering the plot out loud.</p>
-          <p class="meta">Swedish Cottage<br>Central Park · Sat &amp; Sun, 11am</p>
-        </article>
-      </section>
-
-      <section class="spine" aria-label="Along the avenues">
-        <h2>Along the avenues</h2>
-        <ol>
-          <li>
-            <span class="ave">Riverside</span>
-            <strong>Golden hour loop</strong>
-            <em>Enter at 79th</em>
-          </li>
-          <li>
-            <span class="ave">Broadway</span>
-            <strong>Jazz tonight</strong>
-            <em>Smoke, 106th</em>
-          </li>
-          <li>
-            <span class="ave">Amsterdam</span>
-            <strong>New restaurant</strong>
-            <em>Linden, 84th</em>
-          </li>
-          <li>
-            <span class="ave">Columbus</span>
-            <strong>Farmers market</strong>
-            <em>Sunday, 79th</em>
-          </li>
-          <li>
-            <span class="ave">Central Park W</span>
-            <strong>Puppet show</strong>
-            <em>Swedish Cottage</em>
-          </li>
-        </ol>
-      </section>
-
-      <section class="also" id="also">
-        <div class="also-head">
-          <h2>Also on the blocks</h2>
-          <p>Four more reasons to leave the apartment.</p>
+      <article class="card" id="linden">
+        <div class="card-art day">
+          <svg viewBox="0 0 360 180" aria-hidden="true">
+            <rect width="360" height="180" fill="#f4e7cf"/>
+            <circle cx="64" cy="70" r="36" fill="#3d9460"/>
+            <rect x="58" y="96" width="8" height="50" fill="#6b4a32"/>
+            <rect x="130" y="36" width="150" height="144" rx="8" fill="#fffdf8"/>
+            <path d="M130 70 h150" stroke="#2f7a4e" stroke-width="16"/>
+            <rect x="168" y="92" width="74" height="48" rx="4" fill="#d7efe0"/>
+            <rect x="188" y="140" width="34" height="40" fill="#e7c9a2"/>
+          </svg>
         </div>
-        <ul>
-          <li>
-            <time>Thu · 7pm</time>
-            <div>
-              <strong>Reading at Book Culture</strong>
-              <span>A short story night, then the shop stays open. Columbus &amp; 82nd.</span>
-            </div>
-          </li>
-          <li>
-            <time>Fri · 8pm</time>
-            <div>
-              <strong>A seated show at the Beacon</strong>
-              <span>Broadway &amp; 74th. The marquee is the neighborhood’s lighthouse.</span>
-            </div>
-          </li>
-          <li>
-            <time>Wed · 6pm</time>
-            <div>
-              <strong>Night hours at the museum</strong>
-              <span>American Museum of Natural History. Fewer strollers, same blue whale.</span>
-            </div>
-          </li>
-          <li>
-            <time>Any clear evening</time>
-            <div>
-              <strong>Riverside, while the light lasts</strong>
-              <span>Down the stairs at 79th. The river does the rest.</span>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </main>
+        <div class="card-body">
+          <p class="tag">New · eat</p>
+          <h2>Linden, just opened.</h2>
+          <p>A sunny corner on Amsterdam. Wood-fired vegetables, a rye loaf, and tables that go after seven.</p>
+          <p class="when">Amsterdam &amp; 84th · Dinner from 5</p>
+        </div>
+      </article>
+
+      <article class="card" id="puppets">
+        <div class="card-art grove">
+          <svg viewBox="0 0 360 180" aria-hidden="true">
+            <rect width="360" height="180" fill="#d9f0df"/>
+            <ellipse cx="180" cy="160" rx="160" ry="28" fill="#b7d7b4"/>
+            <circle cx="70" cy="90" r="48" fill="#2f7a4e"/>
+            <circle cx="290" cy="84" r="54" fill="#257248"/>
+            <rect x="148" y="78" width="70" height="62" rx="4" fill="#c9854a"/>
+            <path d="M138 82 L183 48 L228 82 Z" fill="#8d4e2b"/>
+            <rect x="174" y="104" width="16" height="28" fill="#6b3a22"/>
+          </svg>
+        </div>
+        <div class="card-body">
+          <p class="tag">Weekend · kids</p>
+          <h2>Puppets in the park.</h2>
+          <p>The Swedish Cottage, tucked in the trees. Forty minutes, a wooden stage, the good seats on the grass.</p>
+          <p class="when">Central Park · Sat &amp; Sun, 11am</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="parks" id="parks">
+      <div class="parks-head">
+        <h2>Green hours</h2>
+        <p>When the plan is just to be outside.</p>
+      </div>
+      <div class="park-grid">
+        <article>
+          <p class="tag">Riverside</p>
+          <h3>The loop while the light lasts.</h3>
+          <p>Down the stairs at 79th. The river does the rest.</p>
+        </article>
+        <article>
+          <p class="tag">Central Park</p>
+          <h3>Stay after the puppet show.</h3>
+          <p>The lawn by the cottage is the easiest picnic on the West Side.</p>
+        </article>
+        <article>
+          <p class="tag">Thursday · 7pm</p>
+          <h3>Reading at Book Culture.</h3>
+          <p>Short stories, then the shop stays open. Columbus &amp; 82nd.</p>
+        </article>
+        <article>
+          <p class="tag">Wednesday · 6pm</p>
+          <h3>The museum, after hours.</h3>
+          <p>Fewer strollers, same blue whale. Central Park West.</p>
+        </article>
+      </div>
+    </section>
 
     <footer>
-      <p class="logo-sm">West End</p>
+      <p class="brand">West End</p>
       <p>From 59th to 110th, the Hudson to Central Park.</p>
     </footer>
   </div>
